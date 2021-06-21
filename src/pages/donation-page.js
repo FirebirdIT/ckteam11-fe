@@ -1,10 +1,10 @@
-import { React, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import CropFreeIcon from "@material-ui/icons/CropFree";
+// import Fab from "@material-ui/core/Fab";
+// import CropFreeIcon from "@material-ui/icons/CropFree";
 import Title from "../components/title/title";
 import DonationForm from "../components/form/donation-form";
-import QRCodeDialog from "../components/dialog/qrcode";
+// import QRCodeDialog from "../components/dialog/qrcode";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -22,25 +22,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DonationPage() {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
   return (
     <div className={classes.paper}>
       <Title>Donation Form</Title>
       <DonationForm />
-      <Fab
+      {/* <Fab
         color="primary"
         aria-label="add"
         className={classes.fab}
         onClick={handleClickOpen}
       >
         <CropFreeIcon />
-      </Fab>
-      <QRCodeDialog isOpened={open} closeDialog={() => setOpen(false)} />
+      </Fab> */}
+      {/* <QRCodeDialog isOpened={open} closeDialog={() => setOpen(false)} /> */}
     </div>
   );
 }
