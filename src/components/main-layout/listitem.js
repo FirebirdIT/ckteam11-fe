@@ -2,7 +2,16 @@ import React from "react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import HomeIcon from "@material-ui/icons/Home";
+import {
+  ListAlt,
+  GroupAdd,
+  PersonAdd,
+  Group,
+  MonetizationOn,
+  Contacts,
+  AccountCircle,
+  ExitToApp,
+} from "@material-ui/icons";
 
 const userType = localStorage.getItem("role");
 
@@ -16,7 +25,7 @@ export const mainListItems = (
       }}
     >
       <ListItemIcon>
-        <HomeIcon />
+        <ListAlt />
       </ListItemIcon>
       <ListItemText primary="Donation Summary" />
     </ListItem>
@@ -29,7 +38,7 @@ export const mainListItems = (
         }}
       >
         <ListItemIcon>
-          <HomeIcon />
+          <GroupAdd />
         </ListItemIcon>
         <ListItemText primary="Team Registration" />
       </ListItem>
@@ -43,7 +52,7 @@ export const mainListItems = (
         }}
       >
         <ListItemIcon>
-          <HomeIcon />
+          <PersonAdd />
         </ListItemIcon>
         <ListItemText primary="Volunteer Registration" />
       </ListItem>
@@ -56,7 +65,7 @@ export const mainListItems = (
       }}
     >
       <ListItemIcon>
-        <HomeIcon />
+        <MonetizationOn />
       </ListItemIcon>
       <ListItemText primary="Donation" />
     </ListItem>
@@ -69,7 +78,7 @@ export const mainListItems = (
         }}
       >
         <ListItemIcon>
-          <HomeIcon />
+          <Group />
         </ListItemIcon>
         <ListItemText primary="User Summary" />
       </ListItem>
@@ -83,7 +92,7 @@ export const mainListItems = (
         }}
       >
         <ListItemIcon>
-          <HomeIcon />
+          <Contacts />
         </ListItemIcon>
         <ListItemText primary="User Profile" />
       </ListItem>
@@ -97,7 +106,7 @@ export const mainListItems = (
         }}
       >
         <ListItemIcon>
-          <HomeIcon />
+          <AccountCircle />
         </ListItemIcon>
         <ListItemText primary="Profile" />
       </ListItem>
@@ -115,7 +124,7 @@ export const secondaryListItems = (
       }}
     >
       <ListItemIcon>
-        <HomeIcon />
+        <ExitToApp />
       </ListItemIcon>
       <ListItemText primary="Sign Out" />
     </ListItem>
