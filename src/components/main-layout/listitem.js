@@ -8,7 +8,6 @@ import {
   PersonAdd,
   Group,
   MonetizationOn,
-  Contacts,
   AccountCircle,
   ExitToApp,
 } from "@material-ui/icons";
@@ -81,20 +80,6 @@ export const mainListItems = (
           <Group />
         </ListItemIcon>
         <ListItemText primary="User Summary" />
-      </ListItem>
-    )}
-    {/* USER PROFILE */}
-    {localStorage.getItem("role") === "volunteer" ? null : (
-      <ListItem
-        button
-        onClick={() => {
-          window.location.href = `/${userType}/user-info`;
-        }}
-      >
-        <ListItemIcon>
-          <Contacts />
-        </ListItemIcon>
-        <ListItemText primary="User Profile" />
       </ListItem>
     )}
     {/* PROFILE */}
