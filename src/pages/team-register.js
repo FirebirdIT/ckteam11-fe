@@ -1,6 +1,7 @@
-import { React, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Title from "../components/title/title";
+import TeamRegisterForm from "../components/form/team-register";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -17,6 +18,7 @@ export default function TeamRegisterPage() {
   return (
     <div className={classes.paper}>
       <Title>Team Registration</Title>
+      <TeamRegisterForm />
     </div>
   );
 }

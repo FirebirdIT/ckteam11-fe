@@ -1,6 +1,7 @@
-import { React, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Title from "../components/title/title";
+import UserTable from "../components/user-list/user-info";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -17,8 +18,11 @@ export default function UserList() {
   return (
     <div className={classes.paper}>
       <Title>
-        {localStorage.getItem("role") === "team" ? "Volunteers" : "Teams"}
+        {localStorage.getItem("role") === "team"
+          ? "Volunteers"
+          : "User Summary"}
       </Title>
+      <UserTable />
     </div>
   );
 }
