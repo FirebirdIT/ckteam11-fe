@@ -30,8 +30,8 @@ export default function DonationForm() {
   const classes = useStyles();
   const [customerName, setCustomerName] = useState("");
   const [email, setEmail] = useState("");
-  const [contactNumber, setContactNumber] = useState("");
-  const [amount, setAmount] = useState("");
+  const [contactNumber, setContactNumber] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState("");
   const [donationType, setDonationType] = useState("");
   const [chequeNo, setChequeNo] = useState("");
@@ -58,9 +58,9 @@ export default function DonationForm() {
         donation_type: donationType,
         cheque_no: chequeNo,
         email: email,
-        coffin: coffin == true ? 1 : 0,
-        medicine: medicine == true ? 1 : 0,
-        cash_donation: cash == true ? 1 : 0,
+        coffin: coffin === true ? 1 : 0,
+        medicine: medicine === true ? 1 : 0,
+        cash_donation: cash === true ? 1 : 0,
         cust_phone_no: contactNumber,
         username: localStorage.getItem("username"),
         donation_date: moment(now.getTime()).format("YYYY-MM-DD hh:mm:ss"),
@@ -94,10 +94,6 @@ export default function DonationForm() {
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  const handleDonationType = (event) => {
-    setDonationType(event.target.value);
   };
 
   const clearInput = () => {
@@ -215,10 +211,10 @@ export default function DonationForm() {
           onChange={(e) => setChequeNo(e.target.value)}
         />
       ) : donationType == "2" ? (
-        <img className="image" src="/logo192.png" alt="no image" />
+        <img src="/logo192.png" alt="null" />
       ) : null}
       <div className={classes.submit}>
-        {loading === false ? (
+        {loading == false ? (
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Button

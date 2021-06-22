@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { DataGrid } from "@material-ui/data-grid";
+import DescriptionIcon from "@material-ui/icons/Description";
+import { FormControlLabel, IconButton } from "@material-ui/core";
 
 var moment = require("moment-timezone");
 
@@ -10,13 +12,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const MatEdit = ({ index }) => {
+  const handleEditClick = () => {
+    window.location.href = `${process.env.REACT_APP_API_KEY}/pdf/${index}`;
+  };
+
+  return (
+    <FormControlLabel
+      control={
+        <IconButton
+          color="primary"
+          aria-label="add an alarm"
+          onClick={handleEditClick}
+        >
+          <DescriptionIcon />
+        </IconButton>
+      }
+    />
+  );
+};
+
 const columns = [
-  { field: "datetime", headerName: "DateTime", width: 200, identity: true },
+  { field: "id", headerName: "ID", width: 200, hide: true },
+  { field: "datetime", headerName: "DateTime", width: 200 },
   { field: "customer_name", headerName: "Customer Name", width: 200 },
   {
     field: "amount",
     headerName: "Amount (RM)",
-    width: 200,
+    width: 170,
   },
   {
     field: "username",
@@ -27,7 +50,24 @@ const columns = [
     field: "description",
     headerName: "Description",
     sortable: false,
-    width: 350,
+    width: 250,
+  },
+  {
+    field: "actions",
+    headerName: "Receipt",
+    sortable: false,
+    width: 130,
+    disableClickEventBubbling: true,
+    renderCell: (params) => {
+      return (
+        <div
+          className="d-flex justify-content-between align-items-center"
+          style={{ cursor: "pointer" }}
+        >
+          <MatEdit index={params.row.id} />
+        </div>
+      );
+    },
   },
 ];
 
@@ -36,7 +76,7 @@ export default function DonationTable() {
   const [donation, setDonation] = useState([]);
   let newData = donation.map((d, i) => {
     return {
-      id: i++,
+      id: d.id,
       amount: parseFloat(d.amount).toFixed(2),
       customer_name: d.customer_name,
       datetime: moment(moment.utc(d.datetime).valueOf())
@@ -48,21 +88,15 @@ export default function DonationTable() {
   });
 
   useEffect(() => {
-    fetch(
-      localStorage.getItem("role") === "admin"
-        ? `${process.env.REACT_APP_API_KEY}/donation-list`
-        : `${process.env.REACT_APP_API_KEY}/volunteer`,
-      {
-        method: "GET",
-        // headers: {
-        //   Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        // },
-      }
-    )
+    fetch(`${process.env.REACT_APP_API_KEY}/donation-list`, {
+      method: "GET",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      // },
+    })
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log("data");
           if (result["success"] === true) {
             setDonation(result["data"]);
           }
