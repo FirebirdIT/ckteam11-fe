@@ -60,19 +60,7 @@ export default function VolunteerRegister() {
 
   const onRegister = (e) => {
     e.preventDefault();
-    console.log(
-      JSON.stringify({
-        username: username,
-        display_name: displayName,
-        address: address,
-        phone_no: phoneNo,
-        ic: ic,
-        team: team,
-        password: password,
-      })
-    );
     if (password === confirmedPassword) {
-      e.preventDefault();
       setLoading(true);
       fetch(`${process.env.REACT_APP_API_KEY}/volunteer/register`, {
         method: "POST",
