@@ -49,11 +49,11 @@ export default function Team() {
         <Route path={`${match.url}/profile`}>
           <Profile />
         </Route>
-        <Route path={`${match.url}/user-list`}>
-          <UserList />
-        </Route>
         <Route path={`${match.url}/user-info`}>
           <UserProfile />
+        </Route>
+        <Route path={`${match.url}/user-list`}>
+          <UserList />
         </Route>
       </Switch>
     </div>

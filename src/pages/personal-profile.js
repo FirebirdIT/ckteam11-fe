@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Title from "../components/title/title";
+import ProfileContent from "../components/user-list/profile";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -17,6 +18,7 @@ export default function Profile() {
   return (
     <div className={classes.paper}>
       <Title>Profile</Title>
+      <ProfileContent />
     </div>
   );
 }

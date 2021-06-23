@@ -19,17 +19,12 @@ export default function UserProfile() {
   return (
     <div className={classes.paper}>
       <Title>
-        {localStorage.getItem("role") === "admin" ||
-        localStorage.getItem("team") === "false"
-          ? "User Profile"
-          : "Profile"}
+        {localStorage.getItem("vUsername") === null
+          ? `${localStorage.getItem("tUsername")}  Profile`
+          : `${localStorage.getItem("vUsername")}  Profile`}
       </Title>
       <Profile />
-      {localStorage.getItem("role") === "admin" ||
-      (localStorage.getItem("role") === "team" &&
-        localStorage.getItem("vUsername") != null) ? (
-        <DonationTable />
-      ) : null}
+      <DonationTable />
     </div>
   );
 }

@@ -87,7 +87,7 @@ export const mainListItems = (
       <ListItem
         button
         onClick={() => {
-          window.location.href = `/${userType}/user-info`;
+          window.location.href = `/${userType}/profile`;
         }}
       >
         <ListItemIcon>

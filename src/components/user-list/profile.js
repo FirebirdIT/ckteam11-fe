@@ -19,22 +19,22 @@ export default function UserProfile() {
 
   useEffect(() => {
     fetch(
-      localStorage.getItem("role") === "admin"
-        ? localStorage.getItem("vUsername") === null
-          ? `${process.env.REACT_APP_API_KEY}/team/${localStorage.getItem(
-              "tUsername"
-            )}`
-          : `${process.env.REACT_APP_API_KEY}/volunteer/${localStorage.getItem(
-              "vUsername"
-            )}`
-        : localStorage.getItem("role") === "team" &&
-          localStorage.getItem("vUsername") === null
+      localStorage.getItem("vUsername") != null
+        ? `${process.env.REACT_APP_API_KEY}/volunteer/${localStorage.getItem(
+            "vUsername"
+          )}`
+        : localStorage.getItem("tUsername") != null
+        ? `${process.env.REACT_APP_API_KEY}/team/${localStorage.getItem(
+            "tUsername"
+          )}`
+        : localStorage.getItem("role") === "team"
         ? `${process.env.REACT_APP_API_KEY}/team/${localStorage.getItem(
             "username"
           )}`
         : `${process.env.REACT_APP_API_KEY}/volunteer/${localStorage.getItem(
             "username"
           )}`,
+
       {
         method: "GET",
       }
@@ -44,6 +44,7 @@ export default function UserProfile() {
         (result) => {
           if (result["success"] === true) {
             setProfileData(result["data"]);
+            console.log(result["data"]);
           }
         },
         (error) => {
@@ -74,8 +75,9 @@ export default function UserProfile() {
         fullWidth
         margin="normal"
         label={
-          localStorage.getItem("role") === "team" ||
-          localStorage.getItem("tUsername") != null
+          localStorage.getItem("role") === "admin" ||
+          (localStorage.getItem("vUsername") === null &&
+            localStorage.getItem("role") === "team")
             ? "English Name"
             : "Name"
         }
@@ -86,8 +88,9 @@ export default function UserProfile() {
           readOnly: true,
         }}
         value={
-          localStorage.getItem("role") === "team" ||
-          localStorage.getItem("tUsername") != null
+          localStorage.getItem("role") === "admin" ||
+          (localStorage.getItem("vUsername") === null &&
+            localStorage.getItem("role") === "team")
             ? profileData.english_name
             : profileData.display_name
         }
@@ -124,8 +127,9 @@ export default function UserProfile() {
           />
         </div>
       ) : null}
-      {localStorage.getItem("role") === "team" ||
-      localStorage.getItem("tUsername") != null ? (
+      {localStorage.getItem("role") === "admin" ||
+      (localStorage.getItem("vUsername") === null &&
+        localStorage.getItem("role") === "team") ? (
         <div>
           {" "}
           <TextField
@@ -184,8 +188,9 @@ export default function UserProfile() {
           variant="outlined"
         />
       </div>
-      {localStorage.getItem("role") === "team" ||
-      localStorage.getItem("tUsername") != null ? (
+      {localStorage.getItem("role") === "admin" ||
+      (localStorage.getItem("vUsername") === null &&
+        localStorage.getItem("role") === "team") ? (
         <div>
           <TextField
             fullWidth

@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import DonationSummary from "../donation-summary";
 import DonationPage from "../donation-page";
-import UserProfile from "../user-info-page";
+import Profile from "../personal-profile";
 
 export default function Volunteer() {
   let match = useRouteMatch("/volunteer");
@@ -38,8 +38,8 @@ export default function Volunteer() {
           {/* donation list page */}
           <DonationPage />
         </Route>
-        <Route path={`${match.url}/user-info`}>
-          <UserProfile />
+        <Route path={`${match.url}/profile`}>
+          <Profile />
         </Route>
       </Switch>
     </div>
