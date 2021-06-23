@@ -19,13 +19,13 @@ export default function Team() {
       localStorage.getItem("username") === null
     ) {
       localStorage.clear();
-      window.location.href = "/signIn";
+      window.location.href = "/sign-in";
       alert("Please login.");
     } else if (localStorage.getItem("role") !== "team") {
       alert("Access to the page is denied.");
       localStorage.clear();
       sessionStorage.clear();
-      window.location.href = "/signIn";
+      window.location.href = "/sign-in";
     }
   }, []);
 

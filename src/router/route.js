@@ -30,7 +30,10 @@ export default function App() {
         <main className={classes.content}>
           <Container maxWidth="lg" className={classes.container}>
             <Switch>
-              <Route path="/signIn">
+              <Route exact path="/">
+                <SignIn />
+              </Route>
+              <Route path="/sign-in">
                 {/* sign in page */}
                 <SignIn />
               </Route>

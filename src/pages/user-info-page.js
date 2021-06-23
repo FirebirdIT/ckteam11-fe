@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Title from "../components/title/title";
 import Profile from "../components/user-list/profile";
+import DonationTable from "../components/donation-list/donation-table";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,6 +25,11 @@ export default function UserProfile() {
           : "Profile"}
       </Title>
       <Profile />
+      {localStorage.getItem("role") === "admin" ||
+      (localStorage.getItem("role") === "team" &&
+        localStorage.getItem("vUsername") != null) ? (
+        <DonationTable />
+      ) : null}
     </div>
   );
 }

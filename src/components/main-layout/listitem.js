@@ -87,7 +87,7 @@ export const mainListItems = (
       <ListItem
         button
         onClick={() => {
-          window.location.href = `/${userType}/profile`;
+          window.location.href = `/${userType}/user-info`;
         }}
       >
         <ListItemIcon>
@@ -105,7 +105,7 @@ export const secondaryListItems = (
       button
       onClick={() => {
         localStorage.clear();
-        window.location.href = "/signIn";
+        window.location.href = "/sign-in";
       }}
     >
       <ListItemIcon>

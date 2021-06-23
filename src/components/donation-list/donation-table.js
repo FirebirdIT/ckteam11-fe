@@ -79,7 +79,7 @@ export default function DonationTable() {
       id: d.id,
       amount: parseFloat(d.amount).toFixed(2),
       customer_name: d.customer_name,
-      datetime: moment(moment.utc(d.datetime).valueOf())
+      datetime: moment(d.datetime)
         .tz("Asia/Kuala_Lumpur")
         .format("YYYY-MM-DD HH:mm:ss"),
       description: d.description,
@@ -98,7 +98,57 @@ export default function DonationTable() {
       .then(
         (result) => {
           if (result["success"] === true) {
-            setDonation(result["data"]);
+            if (
+              localStorage.getItem("role") === "volunteer" ||
+              localStorage.getItem("role") === "team"
+            ) {
+              let temp = [];
+
+              for (let i = 0; i < result["data"].length; i++) {
+                if (localStorage.getItem("vUsername") === null) {
+                  if (
+                    result["data"][i]["username"] ===
+                    localStorage.getItem("username")
+                  ) {
+                    temp.push(result["data"][i]);
+                  }
+                } else {
+                  if (
+                    result["data"][i]["username"] ===
+                    localStorage.getItem("vUsername")
+                  ) {
+                    temp.push(result["data"][i]);
+                  }
+                }
+              }
+              setDonation(temp);
+            } else if (localStorage.getItem("role") === "admin") {
+              let temp = [];
+
+              if (localStorage.getItem("vUsername") != null) {
+                for (let i = 0; i < result["data"].length; i++) {
+                  if (
+                    result["data"][i]["username"] ===
+                    localStorage.getItem("vUsername")
+                  ) {
+                    temp.push(result["data"][i]);
+                  }
+                }
+                setDonation(temp);
+              } else if (localStorage.getItem("tUsername") != null) {
+                for (let i = 0; i < result["data"].length; i++) {
+                  if (
+                    result["data"][i]["username"] ===
+                    localStorage.getItem("tUsername")
+                  ) {
+                    temp.push(result["data"][i]);
+                  }
+                  setDonation(temp);
+                }
+              } else {
+                setDonation(result["data"]);
+              }
+            }
           }
         },
         (error) => {

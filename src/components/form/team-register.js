@@ -39,6 +39,7 @@ export default function RegisterForm() {
     if (password === confirmedPassword) {
       const formData = new FormData();
       formData.append("username", username);
+      formData.append("password", password);
       formData.append("english_name", engName);
       formData.append("address", address);
       formData.append("phone_no", phoneNo);

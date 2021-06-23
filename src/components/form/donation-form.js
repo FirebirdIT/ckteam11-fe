@@ -30,8 +30,8 @@ export default function DonationForm() {
   const classes = useStyles();
   const [customerName, setCustomerName] = useState("");
   const [email, setEmail] = useState("");
-  const [contactNumber, setContactNumber] = useState(0);
-  const [amount, setAmount] = useState(0);
+  const [contactNumber, setContactNumber] = useState("");
+  const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [donationType, setDonationType] = useState("");
   const [chequeNo, setChequeNo] = useState("");
@@ -41,13 +41,11 @@ export default function DonationForm() {
     coffin: false,
   });
   const [loading, setLoading] = useState(false);
-  var now = new Date();
 
   const { cash, medicine, coffin } = state;
 
   const onDonate = (e) => {
     e.preventDefault();
-    setLoading(true);
     fetch(`${process.env.REACT_APP_API_KEY}/donation`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -63,7 +61,9 @@ export default function DonationForm() {
         cash_donation: cash === true ? 1 : 0,
         cust_phone_no: contactNumber,
         username: localStorage.getItem("username"),
-        donation_date: moment(now.getTime()).format("YYYY-MM-DD hh:mm:ss"),
+        donation_date: moment()
+          .tz("Asia/Kuala_Lumpur")
+          .format("YYYY-MM-DD hh:mm:ss"),
         role: localStorage.getItem("role"),
       }),
     })
@@ -174,7 +174,7 @@ export default function DonationForm() {
           />
         </FormGroup>
       </FormControl>
-      <TextField
+      {/* <TextField
         variant="outlined"
         margin="normal"
         required
@@ -182,7 +182,7 @@ export default function DonationForm() {
         label="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-      />
+      /> */}
       <FormControl required fullWidth variant="outlined" margin="normal">
         <InputLabel>Payment Method</InputLabel>
         <Select
@@ -206,7 +206,6 @@ export default function DonationForm() {
           required
           fullWidth
           label="Cheque Number"
-          type="number"
           value={chequeNo}
           onChange={(e) => setChequeNo(e.target.value)}
         />

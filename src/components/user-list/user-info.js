@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { DataGrid } from "@material-ui/data-grid";
 import DescriptionIcon from "@material-ui/icons/Description";
-import { FormControlLabel, IconButton } from "@material-ui/core";
+import {
+  FormControlLabel,
+  IconButton,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  form,
+  Button,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -10,19 +19,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MatEdit = ({ volunteer }) => {
+const MatEdit = ({ username, role }) => {
   const handleEditClick = () => {
-    alert(volunteer);
+    if (role == "volunteer") {
+      localStorage.setItem("vUsername", username);
+    } else {
+      localStorage.setItem("tUsername", username);
+    }
+    window.location.href = `/${localStorage.getItem("role")}/user-info`;
   };
 
   return (
     <FormControlLabel
       control={
-        <IconButton
-          color="primary"
-          aria-label="add an alarm"
-          onClick={handleEditClick}
-        >
+        <IconButton color="primary" onClick={handleEditClick}>
           <DescriptionIcon />
         </IconButton>
       }
@@ -31,24 +41,18 @@ const MatEdit = ({ volunteer }) => {
 };
 
 const columns = [
-  { field: "id", headerName: "ID", width: 200, hide: true },
-  { field: "username", headerName: "Username", width: 200, hide: true },
-  { field: "english_name", headerName: "Name", width: 200 },
+  { field: "id", hide: true },
+  { field: "role", hide: true },
+  { field: "username", headerName: "Username", width: 200 },
+  { field: "display_name", headerName: "Name", width: 200 },
   {
-    field: "chinese_name",
-    headerName: "Chinese Name",
-    width: 200,
+    field: "address",
+    headerName: "Address",
+    width: 350,
   },
-  {
-    field: "malay_name",
-    headerName: "Malay Name",
-    width: 200,
-  },
-  { field: "address", headerName: "Address", width: 200 },
   {
     field: "phone_no",
     headerName: "Contact Number",
-    type: "number",
     width: 200,
   },
   {
@@ -63,7 +67,10 @@ const columns = [
           className="d-flex justify-content-between align-items-center"
           style={{ cursor: "pointer" }}
         >
-          <MatEdit index={params.row.volunteer} />
+          <MatEdit
+            username={params.getValue(params.row.id, "username")}
+            role={params.getValue(params.row.id, "role")}
+          />
         </div>
       );
     },
@@ -72,21 +79,35 @@ const columns = [
 
 export default function UserTable() {
   const classes = useStyles();
-  const [donation, setDonation] = useState([]);
-  let newData = donation.map((d, i) => {
+  const [users, setUsers] = useState([]);
+  const [vUsers, setVUsers] = useState([]);
+  const [userGroup, setUserGroup] = useState(0);
+
+  let newData = users.map((d, i) => {
     return {
-      id: d.id,
-      amount: parseFloat(d.amount).toFixed(2),
-      chinese_name: d.chinese_name,
-      english_name: d.english_name,
-      malay_name: d.malay_name,
+      id: i++,
+      display_name: d.display_name,
       address: d.address,
       phone_no: d.phone_no,
       username: d.username,
+      role: "team",
+    };
+  });
+
+  let vData = vUsers.map((d, i) => {
+    return {
+      id: i++,
+      display_name: d.display_name,
+      address: d.address,
+      phone_no: d.phone_no,
+      username: d.username,
+      role: "volunteer",
     };
   });
 
   useEffect(() => {
+    localStorage.removeItem("vUsername");
+    localStorage.removeItem("tUsername");
     fetch(`${process.env.REACT_APP_API_KEY}/user-list`, {
       method: "GET",
       // headers: {
@@ -97,7 +118,37 @@ export default function UserTable() {
       .then(
         (result) => {
           if (result["success"] === true) {
-            setDonation(result["data"]);
+            if (localStorage.getItem("role") === "team") {
+              let temp = [];
+              for (let index = 0; index < result["data"].length; index++) {
+                if (
+                  result["data"][index]["username"] ===
+                  localStorage.getItem("username")
+                ) {
+                  for (
+                    let j = 0;
+                    j < result["data"][index]["volunteer"].length;
+                    j++
+                  ) {
+                    temp.push(result["data"][index]["volunteer"][j]);
+                  }
+                }
+              }
+              setVUsers(temp);
+            } else if (localStorage.getItem("role") === "admin") {
+              let temp = [];
+              for (let index = 0; index < result["data"].length; index++) {
+                for (
+                  let j = 0;
+                  j < result["data"][index]["volunteer"].length;
+                  j++
+                ) {
+                  temp.push(result["data"][index]["volunteer"][j]);
+                }
+              }
+              setVUsers(temp);
+              setUsers(result["data"]);
+            }
           }
         },
         (error) => {
@@ -108,8 +159,44 @@ export default function UserTable() {
   }, []);
 
   return (
-    <div style={{ height: 500, width: "100%" }} className={classes.submit}>
-      <DataGrid rows={newData} columns={columns} pageSize={10} />
-    </div>
+    <React.Fragment>
+      {/* <div style={{ width: "100%" }} className={classes.submit}>
+       
+      </div> */}
+
+      <div style={{ height: 700, width: "100%" }} className={classes.submit}>
+        {localStorage.getItem("role") === "admin" ? (
+          <FormControl
+            variant="outlined"
+            className={classes.formControl}
+            style={{ width: 250 }}
+            size="small"
+          >
+            <InputLabel id="demo-simple-select-outlined-label">
+              User Group
+            </InputLabel>
+            <Select
+              value={userGroup}
+              onChange={(e) => setUserGroup(e.target.value)}
+              label="User Group"
+            >
+              <MenuItem value="0">Team</MenuItem>
+              <MenuItem value={1}>Volunteer</MenuItem>
+            </Select>
+          </FormControl>
+        ) : null}
+
+        <DataGrid
+          rows={
+            userGroup === 1 || localStorage.getItem("role") === "team"
+              ? vData
+              : newData
+          }
+          columns={columns}
+          pageSize={10}
+          className={classes.submit}
+        />
+      </div>
+    </React.Fragment>
   );
 }

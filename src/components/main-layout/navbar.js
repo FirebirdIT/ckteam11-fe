@@ -49,9 +49,9 @@ export default function NabVar() {
   useEffect(() => {
     console.log(localStorage.getItem("access_token"));
     if (
-      localStorage.getItem("access_token") === undefined ||
-      localStorage.getItem("role") === undefined ||
-      localStorage.getItem("username") === undefined ||
+      // localStorage.getItem("access_token") === undefined ||
+      // localStorage.getItem("role") === undefined ||
+      // localStorage.getItem("username") === undefined ||
       localStorage.getItem("access_token") === null ||
       localStorage.getItem("role") === null ||
       localStorage.getItem("username") === null

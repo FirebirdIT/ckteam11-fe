@@ -59,28 +59,26 @@ export default function SignIn() {
             localStorage.setItem("role", result["role"]);
             localStorage.setItem("username", username);
             if (result["role"] === "admin") {
-              window.location.href = "/admin";
+              window.location.href = "/admin/donation-list";
             } else if (result["role"] === "team") {
-              window.location.href = "/team";
+              window.location.href = "/team/donation-list";
             } else if (result["role"] === "volunteer") {
-              window.location.href = "/volunteer";
+              window.location.href = "/volunteer/donation-list";
             }
-            setLoading(false);
           } else {
             alert(result["msg"]);
             setUsername("");
             setPassword("");
-            setLoading(false);
           }
         },
         (error) => {
           console.log(error);
           localStorage.clear();
           sessionStorage.clear();
-          setLoading(false);
           alert("Login failed. Please try again.");
         }
       );
+    setLoading(false);
   };
 
   return (

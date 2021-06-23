@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import DonationSummary from "../donation-summary";
 import DonationPage from "../donation-page";
-import Profile from "../personal-profile";
+import UserProfile from "../user-info-page";
 
 export default function Volunteer() {
   let match = useRouteMatch("/volunteer");
@@ -16,13 +16,13 @@ export default function Volunteer() {
       localStorage.getItem("username") === null
     ) {
       localStorage.clear();
-      window.location.href = "/signIn";
+      window.location.href = "/sign-in";
       alert("Please login.");
     } else if (localStorage.getItem("role") !== "volunteer") {
       alert("Access to the page is denied.");
       localStorage.clear();
       sessionStorage.clear();
-      window.location.href = "/signIn";
+      window.location.href = "/sign-in";
     }
   }, []);
   return (
@@ -39,7 +39,7 @@ export default function Volunteer() {
           <DonationPage />
         </Route>
         <Route path={`${match.url}/user-info`}>
-          <Profile />
+          <UserProfile />
         </Route>
       </Switch>
     </div>
