@@ -72,14 +72,14 @@ export default function NabVar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" elevation={0} style={{ background: "#ededed" }}>
+      <AppBar position="static" elevation={0}>
         <Toolbar>
           {auth && (
             <IconButton
               edge="start"
               color="inherit"
               aria-label="menu"
-              color="primary"
+              // color="primary"
               onClick={handleDrawerOpen}
               className={clsx(
                 classes.menuButton,
@@ -89,7 +89,7 @@ export default function NabVar() {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography variant="h6" className={classes.title} color="primary">
+          <Typography variant="h6" className={classes.title}>
             ckTeam11 Dashboard
           </Typography>
         </Toolbar>

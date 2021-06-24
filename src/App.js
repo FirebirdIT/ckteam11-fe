@@ -5,7 +5,7 @@ function App() {
   const newTheme = createMuiTheme({
     palette: {
       primary: {
-        main: "#e91e63",
+        main: "#D5165B",
       },
       // secondary: {
       //   main: yellow[600],
