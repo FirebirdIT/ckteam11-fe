@@ -25,6 +25,7 @@ export default function RegisterForm() {
   const [bankOwnerName, setBankOwnerName] = useState("");
   const [bankAccNo, setBankAccNo] = useState();
   const [password, setPassword] = useState("");
+  const [pic, setPic] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [icon, setIcon] = useState();
   const [loading, setLoading] = useState(false);
@@ -46,6 +47,7 @@ export default function RegisterForm() {
       formData.append("english_name", engName);
       formData.append("chinese_name", chineseName);
       formData.append("malay_name", malayName);
+      formData.append("pic", pic);
       formData.append("team_ssm_id", ssmId);
       formData.append("logo_file", icon);
       formData.append("bank_name", bankName);
@@ -135,6 +137,15 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
+        label="Person in Charge"
+        value={pic}
+        onChange={(e) => setPic(e.target.value)}
+      />
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
         label="Contact Number"
         type="number"
         value={phoneNo}
@@ -217,7 +228,7 @@ export default function RegisterForm() {
               color="primary"
               onClick={clearInput}
             >
-              Cancel
+              Clear
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
