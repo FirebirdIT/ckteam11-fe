@@ -87,13 +87,7 @@ export default function UserProfile() {
         InputProps={{
           readOnly: true,
         }}
-        value={
-          localStorage.getItem("role") === "admin" ||
-          (localStorage.getItem("vUsername") === null &&
-            localStorage.getItem("role") === "team")
-            ? profileData.english_name
-            : profileData.display_name
-        }
+        value={profileData.english_name}
         variant="outlined"
       />
       {localStorage.getItem("role") === "volunteer" ||

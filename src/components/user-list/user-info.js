@@ -9,8 +9,6 @@ import {
   Select,
   InputLabel,
   FormControl,
-  form,
-  Button,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +42,7 @@ const columns = [
   { field: "id", hide: true },
   { field: "role", hide: true },
   { field: "username", headerName: "Username", width: 200 },
-  { field: "display_name", headerName: "Name", width: 200 },
+  { field: "english_name", headerName: "Name", width: 200 },
   {
     field: "address",
     headerName: "Address",
@@ -86,7 +84,7 @@ export default function UserTable() {
   let newData = users.map((d, i) => {
     return {
       id: i++,
-      display_name: d.display_name,
+      english_name: d.english_name,
       address: d.address,
       phone_no: d.phone_no,
       username: d.username,
@@ -97,7 +95,7 @@ export default function UserTable() {
   let vData = vUsers.map((d, i) => {
     return {
       id: i++,
-      display_name: d.display_name,
+      english_name: d.english_name,
       address: d.address,
       phone_no: d.phone_no,
       username: d.username,
