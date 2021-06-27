@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  Avatar,
+  // Avatar,
   Button,
   TextField,
   Grid,
@@ -9,7 +9,7 @@ import {
   Link,
   LinearProgress,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

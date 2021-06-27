@@ -44,7 +44,6 @@ export default function RegisterForm() {
       formData.append("english_name", engName);
       formData.append("address", address);
       formData.append("phone_no", phoneNo);
-      formData.append("english_name", engName);
       formData.append("chinese_name", chineseName);
       formData.append("malay_name", malayName);
       formData.append("pic", pic);

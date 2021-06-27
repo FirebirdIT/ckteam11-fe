@@ -73,13 +73,12 @@ export default function VolunteerRegister() {
       formData.append("logo_file", icon);
       formData.append("password", password);
       //show formData values
-      for (let [key, value] of formData) {
-        console.log(`${key}: ${value}`);
-      }
+      // for (let [key, value] of formData) {
+      //   console.log(`${key}: ${value}`);
+      // }
 
       fetch(`${process.env.REACT_APP_API_KEY}/volunteer/register`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: formData,
       })
         .then((res) => res.json())
