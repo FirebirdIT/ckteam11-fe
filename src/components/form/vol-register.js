@@ -21,6 +21,7 @@ export default function VolunteerRegister() {
   const [phoneNo, setPhoneNo] = useState("");
   const [ic, setIC] = useState("");
   const [team, setTeam] = useState("");
+  const [icon, setIcon] = useState();
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [teamList, setTeamList] = useState([]);
@@ -60,46 +61,62 @@ export default function VolunteerRegister() {
 
   const onRegister = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (password === confirmedPassword) {
-      setLoading(true);
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("english_name", displayName);
+      formData.append("address", address);
+      formData.append("phone_no", phoneNo);
+      formData.append("team", team);
+      formData.append("ic", ic);
+      formData.append("logo_file", icon);
+      formData.append("password", password);
+      //show formData values
+      for (let [key, value] of formData) {
+        console.log(`${key}: ${value}`);
+      }
+
       fetch(`${process.env.REACT_APP_API_KEY}/volunteer/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username,
-          display_name: displayName,
-          address: address,
-          phone_no: phoneNo,
-          ic: ic,
-          team: team,
-          password: password,
-        }),
+        body: formData,
       })
         .then((res) => res.json())
         .then(
           (result) => {
             if (result["success"] === true) {
-              setLoading(false);
               alert(result["msg"]);
               window.location.reload();
             } else {
-              setLoading(false);
               alert(result["msg"]);
             }
           },
           (error) => {
             console.log(error);
-            setLoading(false);
+
             alert("Record failed. Please try again.");
           }
         );
     } else {
       alert("The confirmed password is not the same as the password entered.");
     }
+    setLoading(false);
   };
 
   return (
     <form className={classes.form} onSubmit={onRegister}>
+      <Button variant="contained" component="label" color="primary">
+        Upload Logo Icon
+        <input
+          type="file"
+          name={"icon"}
+          onChange={(e) => {
+            setIcon(e.target.files[0]);
+          }}
+          hidden
+        />
+      </Button>
       <TextField
         variant="outlined"
         margin="normal"
@@ -194,7 +211,7 @@ export default function VolunteerRegister() {
               color="primary"
               onClick={clearInput}
             >
-              Cancel
+              Clear
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>

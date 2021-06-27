@@ -62,7 +62,7 @@ export default function RegisterForm() {
         .then(
           (result) => {
             if (
-              result["msg"] === "Record Successfully" &&
+              result["msg"] === `${username} registered successfully` ||
               result["success"] === true
             ) {
               alert(result["msg"]);

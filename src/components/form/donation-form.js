@@ -226,7 +226,7 @@ export default function DonationForm() {
                 color="primary"
                 onClick={clearInput}
               >
-                Cancel
+                Clear
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
