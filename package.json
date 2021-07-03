@@ -16,6 +16,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-swipeable-views": "^0.14.0",
+    "react-to-print": "^2.12.6",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

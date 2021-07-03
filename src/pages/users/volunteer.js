@@ -3,6 +3,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import DonationSummary from "../donation-summary";
 import DonationPage from "../donation-page";
 import Profile from "../personal-profile";
+import PdfPage from "../pdf-page";
 
 export default function Volunteer() {
   let match = useRouteMatch("/volunteer");
@@ -40,6 +41,9 @@ export default function Volunteer() {
         </Route>
         <Route path={`${match.url}/profile`}>
           <Profile />
+        </Route>
+        <Route path={`${match.url}/authorization-letter`}>
+          <PdfPage />
         </Route>
       </Switch>
     </div>
