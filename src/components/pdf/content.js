@@ -32,18 +32,21 @@ const useStyles = makeStyles((theme) => ({
   bg: {
     width: "215.9mm",
     height: "279.4mm",
-    backgroundImage: `url(${process.env.PUBLIC_URL + "/pink-bg.png"})`,
+    backgroundImage: `url(${process.env.PUBLIC_URL + "/mintGreen-bg.jpg"})`,
     backgroundPosition: "stretch",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
   },
   contentPadding: {
-    padding: theme.spacing(4, 3),
+    padding: theme.spacing(2, 3),
   },
   imageSize: {
     width: "35mm",
     height: "50mm",
     overflow: "hidden",
+  },
+  teamImage: {
+    padding: theme.spacing(4),
   },
   space: {
     paddingTop: theme.spacing(5),
@@ -106,36 +109,64 @@ export default function PdfContent() {
       <div>
         <Grid
           container
-          direction="column"
+          direction="row"
           justify="center"
           alignItems="center"
           className={classes.contentPadding}
         >
-          <ThemeProvider theme={chineseTheme}>
-            <Grid item xs={12}>
-              <Typography variant="h4" fullwidth gutterBottom>
-                {content.team_chinese_name}
-              </Typography>
+          <Grid item xs={3}>
+            <div>
+              <img
+                src={`${process.env.REACT_APP_API_KEY}/icon/team/${content.team_username}`}
+                style={{ width: "100%" }}
+                alt="null"
+              />
+            </div>
+          </Grid>
+          <Grid item xs={7}>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="flex-start"
+              className={classes.teamImage}
+            >
+              <ThemeProvider theme={chineseTheme}>
+                <Grid item xs={12}>
+                  <Typography variant="h3" fullwidth>
+                    {content.team_chinese_name}
+                  </Typography>
+                </Grid>
+              </ThemeProvider>
+              <ThemeProvider theme={englishTheme}>
+                <Grid item xs={12}>
+                  <Typography variant="h4" style={{ fontWeight: 700 }}>
+                    {content.team_english_name}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="h4" style={{ fontWeight: 700 }}>
+                    {content.team_malay_name}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="h5" style={{ fontWeight: 700 }}>
+                    {content.team_address}
+                  </Typography>
+                </Grid>
+              </ThemeProvider>
             </Grid>
-          </ThemeProvider>
+          </Grid>
+        </Grid>
+
+        <Grid
+          container
+          direction="column"
+          justify="flex-start"
+          alignItems="center"
+        >
           <ThemeProvider theme={englishTheme}>
             <Grid item xs={12}>
-              <Typography variant="h5" style={{ fontWeight: 700 }}>
-                {content.team_english_name}
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="h5" style={{ fontWeight: 700 }}>
-                {content.team_address}
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="h5" style={{ fontWeight: 700 }}>
-                {content.team_malay_name}
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12} className={classes.space}>
               <Typography variant="h5" style={{ fontWeight: 700 }} gutterBottom>
                 TO WHOM IT MAY CONCERN
               </Typography>
@@ -147,6 +178,7 @@ export default function PdfContent() {
             </div>
           </Grid>
         </Grid>
+
         <Paper elevation={0} className={classes.paperContent}>
           <Grid container>
             <Grid item xs={12}>
@@ -213,13 +245,18 @@ export default function PdfContent() {
 
               <ThemeProvider theme={signTheme}>
                 <Typography variant="h5" className={classes.signPadding}>
-                  {content.team_pic}
+                  LK
                 </Typography>
               </ThemeProvider>
 
-              <Typography variant="subtitle2">{content.team_pic}</Typography>
-              <Typography variant="subtitle2">
-                {content.team_contact_number}
+              <Typography variant="subtitle2" component="div">
+                <Box fontWeight="fontWeightBold" display="inline">
+                  LK,
+                </Box>{" "}
+                Incharge
+              </Typography>
+              <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
+                H/P: {content.team_contact_number}
               </Typography>
             </Grid>
           </Grid>

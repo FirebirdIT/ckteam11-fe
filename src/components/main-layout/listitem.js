@@ -17,6 +17,19 @@ const userType = localStorage.getItem("role");
 
 export const mainListItems = (
   <div>
+    {localStorage.getItem("role") === "volunteer" ? (
+      <ListItem
+        button
+        onClick={() => {
+          window.location.href = `/${userType}/authorization-letter`;
+        }}
+      >
+        <ListItemIcon>
+          <VerifiedUser />
+        </ListItemIcon>
+        <ListItemText primary="Authorization lettertter" />
+      </ListItem>
+    ) : null}
     {/* DONATION LIST */}
     <ListItem
       button
@@ -101,19 +114,6 @@ export const mainListItems = (
         <ListItemText primary="Profile" />
       </ListItem>
     )}
-    {localStorage.getItem("role") === "volunteer" ? (
-      <ListItem
-        button
-        onClick={() => {
-          window.location.href = `/${userType}/authorization-letter`;
-        }}
-      >
-        <ListItemIcon>
-          <VerifiedUser />
-        </ListItemIcon>
-        <ListItemText primary="Authorization lettertter" />
-      </ListItem>
-    ) : null}
   </div>
 );
 

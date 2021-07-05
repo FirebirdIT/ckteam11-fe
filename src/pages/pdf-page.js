@@ -3,6 +3,7 @@ import { makeStyles, Fab } from "@material-ui/core/styles";
 import Title from "../components/title/title";
 import ReactToPrint from "react-to-print";
 import PDFPage from "../components/pdf/pdf";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,7 +30,11 @@ class Example extends React.Component {
     return (
       <div>
         <ReactToPrint
-          trigger={() => <button>Print this out!</button>}
+          trigger={() => (
+            <Button variant="outlined" color="primary">
+              Print this out!
+            </Button>
+          )}
           content={() => this.componentRef}
         />
         <PDFPage ref={(el) => (this.componentRef = el)} />

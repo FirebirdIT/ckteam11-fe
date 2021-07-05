@@ -63,7 +63,7 @@ export default function SignIn() {
             } else if (result["role"] === "team") {
               window.location.href = "/team/donation-list";
             } else if (result["role"] === "volunteer") {
-              window.location.href = "/volunteer/donation-list";
+              window.location.href = "/volunteer/authorization-letter";
             }
           } else {
             alert(result["msg"]);
