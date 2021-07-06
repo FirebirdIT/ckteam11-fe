@@ -88,6 +88,20 @@ export default function UserProfile() {
       );
     } else if (localStorage.getItem("role") === "team") {
       setUploadImg(`${process.env.REACT_APP_API_KEY}/icon/team/${username}`);
+    } else if (localStorage.getItem("role") === "admin") {
+      if (localStorage.getItem("vUsername") != null) {
+        setUploadImg(
+          `${
+            process.env.REACT_APP_API_KEY
+          }/icon/volunteer/${localStorage.getItem("vUsername")}`
+        );
+      } else {
+        setUploadImg(
+          `${process.env.REACT_APP_API_KEY}/icon/team/${localStorage.getItem(
+            "tUsername"
+          )}`
+        );
+      }
     }
     setLoading(false);
   }, []);

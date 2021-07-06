@@ -64,6 +64,9 @@ export default function RegisterForm() {
       formData.append("bank_name", bankName);
       formData.append("bank_owner_name", bankOwnerName);
       formData.append("bank_account_number", bankAccNo);
+      for (let [key, value] of formData) {
+        console.log(`${key}: ${value}`);
+      }
 
       fetch(`${process.env.REACT_APP_API_KEY}/team/register`, {
         method: "POST",
