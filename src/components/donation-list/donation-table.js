@@ -34,27 +34,27 @@ const MatEdit = ({ index }) => {
 
 const columns = [
   { field: "id", headerName: "ID", width: 200, hide: true },
-  { field: "datetime", headerName: "DateTime", width: 200 },
-  { field: "customer_name", headerName: "Customer Name", width: 200 },
+  { field: "datetime", headerName: "日期", width: 200 },
+  { field: "customer_name", headerName: "客户姓名", width: 200 },
   {
     field: "amount",
-    headerName: "Amount (RM)",
+    headerName: "数额 (RM)",
     width: 170,
   },
   {
     field: "username",
-    headerName: "Username",
+    headerName: "用户名",
     width: 200,
   },
   {
     field: "description",
-    headerName: "Description",
+    headerName: "注解",
     sortable: false,
     width: 250,
   },
   {
     field: "actions",
-    headerName: "Receipt",
+    headerName: "收据",
     sortable: false,
     width: 130,
     disableClickEventBubbling: true,

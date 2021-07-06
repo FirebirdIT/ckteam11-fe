@@ -122,7 +122,7 @@ export default function DonationForm() {
         margin="normal"
         required
         fullWidth
-        label="Customer Name"
+        label="客户姓名"
         value={customerName}
         onChange={(e) => setCustomerName(e.target.value)}
         autoFocus
@@ -132,7 +132,7 @@ export default function DonationForm() {
         margin="normal"
         required
         fullWidth
-        label="Contact Number"
+        label="联络号码"
         type="number"
         value={contactNumber}
         onChange={(e) => setContactNumber(e.target.value)}
@@ -142,7 +142,7 @@ export default function DonationForm() {
         margin="normal"
         required
         fullWidth
-        label="Email"
+        label="电子邮件"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -151,19 +151,19 @@ export default function DonationForm() {
         margin="normal"
         required
         fullWidth
-        label="Amount (RM)"
+        label="数额 (RM)"
         type="number"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
       <FormControl component="fieldset" margin="normal" required>
-        <FormLabel component="legend">Donation For</FormLabel>
+        <FormLabel component="legend">捐赠给</FormLabel>
         <FormGroup row>
           <FormControlLabel
             control={
               <Checkbox checked={cash} onChange={handleChange} name="cash" />
             }
-            label="Donation(Cash)"
+            label="银额捐款"
           />
           <FormControlLabel
             control={
@@ -173,7 +173,7 @@ export default function DonationForm() {
                 name="medicine"
               />
             }
-            label="Medicine"
+            label="施药"
           />
           <FormControlLabel
             control={
@@ -183,23 +183,23 @@ export default function DonationForm() {
                 name="coffin"
               />
             }
-            label="Coffin"
+            label="施棺"
           />
         </FormGroup>
       </FormControl>
       <FormControl required fullWidth variant="outlined" margin="normal">
-        <InputLabel>Payment Method</InputLabel>
+        <InputLabel>付款方式</InputLabel>
         <Select
           value={donationType}
           onChange={(e) => setDonationType(e.target.value)}
           // onChange={handleDonationType}
-          label="Payment Method"
+          label="付款方式"
           fullWidth
           required
         >
-          <MenuItem value={0}>Cash</MenuItem>
-          <MenuItem value={1}>Cheque</MenuItem>
-          <MenuItem value={2}>QR Code</MenuItem>
+          <MenuItem value={0}>现金</MenuItem>
+          <MenuItem value={1}>支票</MenuItem>
+          <MenuItem value={2}>二维码</MenuItem>
         </Select>
       </FormControl>
 
@@ -236,7 +236,7 @@ export default function DonationForm() {
                 variant="contained"
                 color="primary"
               >
-                Submit
+                提交
               </Button>
             </Grid>
           </Grid>

@@ -27,7 +27,7 @@ export const mainListItems = (
         <ListItemIcon>
           <VerifiedUser />
         </ListItemIcon>
-        <ListItemText primary="Authorization lettertter" />
+        <ListItemText primary="授权证书" />
       </ListItem>
     ) : null}
     {/* DONATION LIST */}
@@ -40,7 +40,7 @@ export const mainListItems = (
       <ListItemIcon>
         <ListAlt />
       </ListItemIcon>
-      <ListItemText primary="Donation Summary" />
+      <ListItemText primary="捐款总额" />
     </ListItem>
     {/* TEAM REGISTER */}
     {localStorage.getItem("role") === "admin" ? (
@@ -53,7 +53,7 @@ export const mainListItems = (
         <ListItemIcon>
           <GroupAdd />
         </ListItemIcon>
-        <ListItemText primary="Team Registration" />
+        <ListItemText primary="团队注册" />
       </ListItem>
     ) : null}
     {/* VOLUNTEER REGISTER */}
@@ -67,7 +67,7 @@ export const mainListItems = (
         <ListItemIcon>
           <PersonAdd />
         </ListItemIcon>
-        <ListItemText primary="Volunteer Registration" />
+        <ListItemText primary="志愿者注册" />
       </ListItem>
     )}
 
@@ -82,7 +82,7 @@ export const mainListItems = (
         <ListItemIcon>
           <MonetizationOn />
         </ListItemIcon>
-        <ListItemText primary="Donation" />
+        <ListItemText primary="捐款表格" />
       </ListItem>
     )}
 
@@ -97,7 +97,13 @@ export const mainListItems = (
         <ListItemIcon>
           <Group />
         </ListItemIcon>
-        <ListItemText primary="User Summary" />
+        <ListItemText
+          primary={
+            localStorage.getItem("role") === "team"
+              ? "注册志愿者信息"
+              : "注册用户信息"
+          }
+        />
       </ListItem>
     )}
     {/* PROFILE */}
@@ -111,7 +117,11 @@ export const mainListItems = (
         <ListItemIcon>
           <AccountCircle />
         </ListItemIcon>
-        <ListItemText primary="Profile" />
+        <ListItemText
+          primary={
+            localStorage.getItem("role") === "team" ? "团队档案" : "个人档案"
+          }
+        />
       </ListItem>
     )}
   </div>
@@ -129,7 +139,7 @@ export const secondaryListItems = (
       <ListItemIcon>
         <ExitToApp />
       </ListItemIcon>
-      <ListItemText primary="Sign Out" />
+      <ListItemText primary="登出" />
     </ListItem>
   </div>
 );

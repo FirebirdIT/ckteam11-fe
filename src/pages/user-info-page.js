@@ -20,8 +20,8 @@ export default function UserProfile() {
     <div className={classes.paper}>
       <Title>
         {localStorage.getItem("vUsername") === null
-          ? `${localStorage.getItem("tUsername")}  Profile`
-          : `${localStorage.getItem("vUsername")}  Profile`}
+          ? `${localStorage.getItem("tUsername")}  团队档案`
+          : `${localStorage.getItem("vUsername")}  志愿者档案`}
       </Title>
       <Profile />
       <DonationTable />

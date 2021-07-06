@@ -106,7 +106,7 @@ export default function VolunteerRegister() {
   return (
     <form className={classes.form} onSubmit={onRegister}>
       <Button variant="contained" component="label" color="primary">
-        Upload Logo Icon
+        上传个人图标
         <input
           type="file"
           name={"icon"}
@@ -121,7 +121,7 @@ export default function VolunteerRegister() {
         margin="normal"
         required
         fullWidth
-        label="Username"
+        label="用户名"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         autoFocus
@@ -131,7 +131,7 @@ export default function VolunteerRegister() {
         margin="normal"
         required
         fullWidth
-        label="Display Name"
+        label="姓名"
         value={displayName}
         onChange={(e) => setDisplayName(e.target.value)}
         autoFocus
@@ -141,7 +141,7 @@ export default function VolunteerRegister() {
         margin="normal"
         required
         fullWidth
-        label="Idenity Card Number"
+        label="身份证号码"
         type="number"
         value={ic}
         onChange={(e) => setIC(e.target.value)}
@@ -155,7 +155,7 @@ export default function VolunteerRegister() {
           <TextField
             {...params}
             variant="outlined"
-            label="Team"
+            label="所属团队"
             margin="normal"
             required
           />
@@ -166,7 +166,7 @@ export default function VolunteerRegister() {
         margin="normal"
         required
         fullWidth
-        label="Contact Number"
+        label="联络号码"
         type="number"
         value={phoneNo}
         onChange={(e) => setPhoneNo(e.target.value)}
@@ -176,7 +176,7 @@ export default function VolunteerRegister() {
         margin="normal"
         required
         fullWidth
-        label="Address"
+        label="地址"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
       />
@@ -185,7 +185,7 @@ export default function VolunteerRegister() {
         margin="normal"
         required
         fullWidth
-        label="Password"
+        label="密码"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -195,7 +195,7 @@ export default function VolunteerRegister() {
         margin="normal"
         required
         fullWidth
-        label="Confirmed Password"
+        label="确认密码"
         type="password"
         value={confirmedPassword}
         className={classes.submit}
@@ -210,12 +210,12 @@ export default function VolunteerRegister() {
               color="primary"
               onClick={clearInput}
             >
-              Clear
+              清除
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button type="submit" fullWidth variant="contained" color="primary">
-              Submit
+              提交
             </Button>
           </Grid>
         </Grid>

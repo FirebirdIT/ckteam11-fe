@@ -30,7 +30,7 @@ export default function DonationPage() {
 
   return (
     <div className={classes.paper}>
-      <Title>Donation Form</Title>
+      <Title>捐款表格</Title>
       <DonationForm />
       {/* <Fab
         color="primary"

@@ -17,7 +17,7 @@ export default function TeamRegisterPage() {
 
   return (
     <div className={classes.paper}>
-      <Title>Team Registration</Title>
+      <Title>团队注册</Title>
       <TeamRegisterForm />
     </div>
   );

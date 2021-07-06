@@ -19,8 +19,8 @@ export default function UserList() {
     <div className={classes.paper}>
       <Title>
         {localStorage.getItem("role") === "team"
-          ? "Volunteers"
-          : "User Summary"}
+          ? "注册志愿者信息"
+          : "注册用户信息"}
       </Title>
       <UserTable />
     </div>

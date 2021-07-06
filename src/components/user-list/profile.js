@@ -176,7 +176,7 @@ export default function UserProfile() {
                   color="primary"
                   onClick={handleEdit}
                 >
-                  Edit
+                  编辑
                 </Button>
               )
             : null}
@@ -184,7 +184,7 @@ export default function UserProfile() {
             <TextField
               fullWidth
               margin="normal"
-              label="Username"
+              label="用户名"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -192,7 +192,7 @@ export default function UserProfile() {
                 readOnly: true,
               }}
               value={username}
-              helperText={edit === false ? "Not edited" : null}
+              helperText={edit === false ? "不可编辑" : null}
               required
               onChange={(e) => setUsername(e.target.value)}
               variant="outlined"
@@ -201,7 +201,7 @@ export default function UserProfile() {
           <TextField
             fullWidth
             margin="normal"
-            label="English Name"
+            label="英语名字"
             InputLabelProps={{
               shrink: true,
             }}
@@ -219,7 +219,7 @@ export default function UserProfile() {
               <TextField
                 fullWidth
                 margin="normal"
-                label="Identity Card Number"
+                label="身份证号码"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -227,7 +227,7 @@ export default function UserProfile() {
                   readOnly: true,
                 }}
                 value={ic}
-                helperText={edit === false ? "Not edited" : null}
+                helperText={edit === false ? "不可编辑" : null}
                 required
                 onChange={(e) => setIC(e.target.value)}
                 variant="outlined"
@@ -235,14 +235,14 @@ export default function UserProfile() {
               <TextField
                 fullWidth
                 margin="normal"
-                label="Team"
+                label="所属团队"
                 InputLabelProps={{
                   shrink: true,
                 }}
                 InputProps={{
                   readOnly: true,
                 }}
-                helperText={edit === false ? "Not edited" : null}
+                helperText={edit === false ? "不可编辑" : null}
                 value={team}
                 required
                 onChange={(e) => setTeam(e.target.value)}
@@ -258,7 +258,7 @@ export default function UserProfile() {
               <TextField
                 fullWidth
                 margin="normal"
-                label="Chinese Name"
+                label="华语名字"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -273,7 +273,7 @@ export default function UserProfile() {
               <TextField
                 fullWidth
                 margin="normal"
-                label="Malay Name"
+                label="国语名字"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -291,7 +291,7 @@ export default function UserProfile() {
             <TextField
               fullWidth
               margin="normal"
-              label="Address"
+              label="地址"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -306,7 +306,7 @@ export default function UserProfile() {
             <TextField
               fullWidth
               margin="normal"
-              label="Contact Number"
+              label="联络号码"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -326,7 +326,7 @@ export default function UserProfile() {
               <TextField
                 fullWidth
                 margin="normal"
-                label="Team SSM ID"
+                label="SSM号码"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -341,7 +341,7 @@ export default function UserProfile() {
               <TextField
                 fullWidth
                 margin="normal"
-                label="Bank Name"
+                label="银行名字"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -356,7 +356,7 @@ export default function UserProfile() {
               <TextField
                 fullWidth
                 margin="normal"
-                label="Bank Owner Name"
+                label="银行账号拥有者"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -371,7 +371,7 @@ export default function UserProfile() {
               <TextField
                 fullWidth
                 margin="normal"
-                label="Bank Account Number"
+                label="银行账号号码"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -390,7 +390,7 @@ export default function UserProfile() {
               fullWidth
               margin="normal"
               className={classes.submit}
-              label="Password"
+              label="密码"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -414,7 +414,7 @@ export default function UserProfile() {
                     color="primary"
                     onClick={cancelEdit}
                   >
-                    Cancel
+                    取消
                   </Button>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -424,7 +424,7 @@ export default function UserProfile() {
                     variant="contained"
                     color="primary"
                   >
-                    Submit
+                    提交
                   </Button>
                 </Grid>
               </Grid>

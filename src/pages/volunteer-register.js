@@ -16,7 +16,7 @@ export default function VolunteerRegister() {
   const classes = useStyles();
   return (
     <div className={classes.paper}>
-      <Title>Volunteer Registration</Title>
+      <Title>志愿者注册</Title>
       <VolunteerRegisterForm />
     </div>
   );

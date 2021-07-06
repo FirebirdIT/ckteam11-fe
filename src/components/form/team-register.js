@@ -84,7 +84,7 @@ export default function RegisterForm() {
   return (
     <form className={classes.form} onSubmit={onRegister}>
       <Button variant="contained" component="label" color="primary">
-        Upload Logo Icon
+        上传团队图标
         <input
           type="file"
           name={"icon"}
@@ -99,7 +99,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Username"
+        label="用户名"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         autoFocus
@@ -109,7 +109,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="English Name"
+        label="英语名字"
         value={engName}
         onChange={(e) => setEngName(e.target.value)}
       />
@@ -118,7 +118,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Chinese Name"
+        label="华语名字"
         value={chineseName}
         onChange={(e) => setChineseName(e.target.value)}
       />
@@ -127,7 +127,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Malay Name"
+        label="国语名字"
         value={malayName}
         onChange={(e) => setMalayName(e.target.value)}
       />
@@ -136,7 +136,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Person in Charge"
+        label="负责人"
         value={pic}
         onChange={(e) => setPic(e.target.value)}
       />
@@ -145,7 +145,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Contact Number"
+        label="联络号码"
         type="number"
         value={phoneNo}
         onChange={(e) => setPhoneNo(e.target.value)}
@@ -155,7 +155,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Address"
+        label="地址"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
       />
@@ -164,7 +164,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="SSM ID"
+        label="SSM号码"
         value={ssmId}
         onChange={(e) => setSsmId(e.target.value)}
       />
@@ -173,7 +173,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Bank Name"
+        label="银行名字"
         value={bankName}
         onChange={(e) => setBankName(e.target.value)}
       />
@@ -182,7 +182,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Bank Owner"
+        label="银行帐号用有者"
         value={bankOwnerName}
         onChange={(e) => setBankOwnerName(e.target.value)}
       />
@@ -191,7 +191,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Bank Account Number"
+        label="银行帐号号码"
         type="number"
         value={bankAccNo}
         onChange={(e) => setBankAccNo(e.target.value)}
@@ -201,7 +201,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Password"
+        label="密码"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
@@ -211,7 +211,7 @@ export default function RegisterForm() {
         margin="normal"
         required
         fullWidth
-        label="Confirmed Password"
+        label="确认密码"
         type="password"
         value={confirmedPassword}
         className={classes.submit}
@@ -227,12 +227,12 @@ export default function RegisterForm() {
               color="primary"
               onClick={clearInput}
             >
-              Clear
+              清除
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button type="submit" fullWidth variant="contained" color="primary">
-              Submit
+              提交
             </Button>
           </Grid>
         </Grid>

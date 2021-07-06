@@ -17,7 +17,7 @@ export default function Profile() {
 
   return (
     <div className={classes.paper}>
-      <Title>Profile</Title>
+      <Title>档案信息</Title>
       <ProfileContent />
     </div>
   );

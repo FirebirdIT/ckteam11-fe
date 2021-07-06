@@ -19,7 +19,7 @@ export default function Profile() {
 
   return (
     <div className={classes.paper}>
-      <Title>Authorization Letter</Title>
+      <Title>授权证书</Title>
       <Example />
     </div>
   );
@@ -32,7 +32,7 @@ class Example extends React.Component {
         <ReactToPrint
           trigger={() => (
             <Button variant="outlined" color="primary">
-              Print this out!
+              打印
             </Button>
           )}
           content={() => this.componentRef}

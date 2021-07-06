@@ -16,7 +16,7 @@ export default function DonationSummary() {
   const classes = useStyles();
   return (
     <div className={classes.paper}>
-      <Title>Donation Summary</Title>
+      <Title>捐款总额</Title>
       <DonationTable />
     </div>
   );

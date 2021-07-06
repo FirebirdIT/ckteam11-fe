@@ -87,7 +87,7 @@ export default function SignIn() {
         <LockOutlinedIcon />
       </Avatar> */}
       <Typography component="h1" variant="h5">
-        Sign in
+        登入页面
       </Typography>
       <form className={classes.form} onSubmit={onLogin}>
         <TextField
@@ -95,7 +95,7 @@ export default function SignIn() {
           margin="normal"
           required
           fullWidth
-          label="Username"
+          label="用户名"
           autoComplete="username"
           autoFocus
           value={username}
@@ -106,7 +106,7 @@ export default function SignIn() {
           margin="normal"
           required
           fullWidth
-          label="Password"
+          label="密码"
           type="password"
           value={password}
           autoComplete="current-password"
@@ -121,12 +121,12 @@ export default function SignIn() {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              登入
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="https://ckteam11.com" variant="body2">
-                  {"Back to main page"}
+                  {"回到首页"}
                 </Link>
               </Grid>
             </Grid>

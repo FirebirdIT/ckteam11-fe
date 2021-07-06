@@ -41,21 +41,21 @@ const MatEdit = ({ username, role }) => {
 const columns = [
   { field: "id", hide: true },
   { field: "role", hide: true },
-  { field: "username", headerName: "Username", width: 200 },
-  { field: "english_name", headerName: "Name", width: 200 },
+  { field: "username", headerName: "用户名", width: 200 },
+  { field: "english_name", headerName: "名字", width: 200 },
   {
     field: "address",
-    headerName: "Address",
+    headerName: "地址",
     width: 350,
   },
   {
     field: "phone_no",
-    headerName: "Contact Number",
+    headerName: "联络号码",
     width: 200,
   },
   {
     field: "actions",
-    headerName: "Action",
+    headerName: "详细信息",
     sortable: false,
     width: 130,
     disableClickEventBubbling: true,
@@ -171,15 +171,15 @@ export default function UserTable() {
             size="small"
           >
             <InputLabel id="demo-simple-select-outlined-label">
-              User Group
+              用户群
             </InputLabel>
             <Select
               value={userGroup}
               onChange={(e) => setUserGroup(e.target.value)}
               label="User Group"
             >
-              <MenuItem value="0">Team</MenuItem>
-              <MenuItem value={1}>Volunteer</MenuItem>
+              <MenuItem value={0}>团队</MenuItem>
+              <MenuItem value={1}>志愿者</MenuItem>
             </Select>
           </FormControl>
         ) : null}
