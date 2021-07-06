@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, TextField, Grid, LinearProgress } from "@material-ui/core";
 
@@ -28,10 +28,22 @@ export default function RegisterForm() {
   const [pic, setPic] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [icon, setIcon] = useState();
+  const [uploadImg, setUploadImg] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setUploadImg(`${process.env.PUBLIC_URL + "/default-img.jpg"}`);
+  }, []);
 
   const clearInput = () => {
     window.location.reload();
+  };
+
+  const onImgChg = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setUploadImg(URL.createObjectURL(event.target.files[0]));
+      setIcon(event.target.files[0]);
+    }
   };
 
   const onRegister = (e) => {
@@ -75,25 +87,36 @@ export default function RegisterForm() {
             alert("Record failed. Please try again.");
           }
         );
-      setLoading(false);
     } else {
       alert("The confirmed password is not the same as the password entered.");
     }
+    setLoading(false);
   };
 
   return (
     <form className={classes.form} onSubmit={onRegister}>
-      <Button variant="contained" component="label" color="primary">
-        上传团队图标
-        <input
-          type="file"
-          name={"icon"}
-          onChange={(e) => {
-            setIcon(e.target.files[0]);
-          }}
-          hidden
-        />
-      </Button>
+      <Grid
+        container
+        direction="column"
+        justifyContent="flex-start"
+        alignItems="center"
+      >
+        <Grid item xs={12} sm={6} md={3}>
+          <div>
+            <img src={uploadImg} style={{ width: "100%" }} alt="null" />
+          </div>
+          <Button
+            fullWidth
+            variant="contained"
+            component="label"
+            color="primary"
+          >
+            上传团队图标
+            <input type="file" name={"icon"} onChange={onImgChg} hidden />
+          </Button>
+        </Grid>
+      </Grid>
+
       <TextField
         variant="outlined"
         margin="normal"

@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  // Avatar,
+  Avatar,
   Button,
   TextField,
   Grid,
@@ -9,7 +9,7 @@ import {
   Link,
   LinearProgress,
 } from "@material-ui/core";
-// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -83,9 +83,9 @@ export default function SignIn() {
 
   return (
     <div className={classes.paper}>
-      {/* <Avatar className={classes.avatar}>
+      <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
-      </Avatar> */}
+      </Avatar>
       <Typography component="h1" variant="h5">
         登入页面
       </Typography>

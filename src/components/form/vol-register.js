@@ -25,6 +25,7 @@ export default function VolunteerRegister() {
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [teamList, setTeamList] = useState([]);
+  const [uploadImg, setUploadImg] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -53,10 +54,18 @@ export default function VolunteerRegister() {
           console.log(error);
         }
       );
+    setUploadImg(`${process.env.PUBLIC_URL + "/default-img.jpg"}`);
   }, []);
 
   const clearInput = () => {
     window.location.reload();
+  };
+
+  const onImgChg = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setUploadImg(URL.createObjectURL(event.target.files[0]));
+      setIcon(event.target.files[0]);
+    }
   };
 
   const onRegister = (e) => {
@@ -105,17 +114,27 @@ export default function VolunteerRegister() {
 
   return (
     <form className={classes.form} onSubmit={onRegister}>
-      <Button variant="contained" component="label" color="primary">
-        上传个人图标
-        <input
-          type="file"
-          name={"icon"}
-          onChange={(e) => {
-            setIcon(e.target.files[0]);
-          }}
-          hidden
-        />
-      </Button>
+      <Grid
+        container
+        direction="column"
+        justifyContent="flex-start"
+        alignItems="center"
+      >
+        <Grid item xs={12} sm={6} md={3}>
+          <div>
+            <img src={uploadImg} style={{ width: "100%" }} alt="null" />
+          </div>
+          <Button
+            fullWidth
+            variant="contained"
+            component="label"
+            color="primary"
+          >
+            上传志愿者图标
+            <input type="file" name={"icon"} onChange={onImgChg} hidden />
+          </Button>
+        </Grid>
+      </Grid>
       <TextField
         variant="outlined"
         margin="normal"
