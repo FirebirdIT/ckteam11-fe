@@ -24,7 +24,6 @@ export default function Admin() {
     } else if (localStorage.getItem("role") !== "admin") {
       alert("Access to the page is denied.");
       localStorage.clear();
-      sessionStorage.clear();
       window.location.href = "/sign-in";
     }
   }, []);

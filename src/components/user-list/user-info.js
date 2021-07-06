@@ -9,6 +9,7 @@ import {
   Select,
   InputLabel,
   FormControl,
+  LinearProgress,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -80,6 +81,7 @@ export default function UserTable() {
   const [users, setUsers] = useState([]);
   const [vUsers, setVUsers] = useState([]);
   const [userGroup, setUserGroup] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   let newData = users.map((d, i) => {
     return {
@@ -104,6 +106,7 @@ export default function UserTable() {
   });
 
   useEffect(() => {
+    setLoading(true);
     localStorage.removeItem("vUsername");
     localStorage.removeItem("tUsername");
     fetch(`${process.env.REACT_APP_API_KEY}/user-list`, {
@@ -151,50 +154,50 @@ export default function UserTable() {
         },
         (error) => {
           console.log(error);
-          //   setLoading(false);
         }
       );
+    setLoading(false);
   }, []);
 
   return (
     <React.Fragment>
-      {/* <div style={{ width: "100%" }} className={classes.submit}>
-       
-      </div> */}
-
-      <div style={{ height: 700, width: "100%" }} className={classes.submit}>
-        {localStorage.getItem("role") === "admin" ? (
-          <FormControl
-            variant="outlined"
-            className={classes.formControl}
-            style={{ width: 250 }}
-            size="small"
-          >
-            <InputLabel id="demo-simple-select-outlined-label">
-              用户群
-            </InputLabel>
-            <Select
-              value={userGroup}
-              onChange={(e) => setUserGroup(e.target.value)}
-              label="User Group"
+      {loading == false ? (
+        <div style={{ height: 700, width: "100%" }} className={classes.submit}>
+          {localStorage.getItem("role") === "admin" ? (
+            <FormControl
+              variant="outlined"
+              className={classes.formControl}
+              style={{ width: 250 }}
+              size="small"
             >
-              <MenuItem value={0}>团队</MenuItem>
-              <MenuItem value={1}>志愿者</MenuItem>
-            </Select>
-          </FormControl>
-        ) : null}
+              <InputLabel id="demo-simple-select-outlined-label">
+                用户群
+              </InputLabel>
+              <Select
+                value={userGroup}
+                onChange={(e) => setUserGroup(e.target.value)}
+                label="User Group"
+              >
+                <MenuItem value={0}>团队</MenuItem>
+                <MenuItem value={1}>志愿者</MenuItem>
+              </Select>
+            </FormControl>
+          ) : null}
 
-        <DataGrid
-          rows={
-            userGroup === 1 || localStorage.getItem("role") === "team"
-              ? vData
-              : newData
-          }
-          columns={columns}
-          pageSize={10}
-          className={classes.submit}
-        />
-      </div>
+          <DataGrid
+            rows={
+              userGroup === 1 || localStorage.getItem("role") === "team"
+                ? vData
+                : newData
+            }
+            columns={columns}
+            pageSize={10}
+            className={classes.submit}
+          />
+        </div>
+      ) : (
+        <LinearProgress className={classes.submit} />
+      )}
     </React.Fragment>
   );
 }

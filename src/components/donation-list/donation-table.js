@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { DataGrid } from "@material-ui/data-grid";
 import DescriptionIcon from "@material-ui/icons/Description";
-import { FormControlLabel, IconButton } from "@material-ui/core";
+import {
+  FormControlLabel,
+  IconButton,
+  LinearProgress,
+} from "@material-ui/core";
 
 var moment = require("moment-timezone");
 
@@ -74,6 +78,7 @@ const columns = [
 export default function DonationTable() {
   const classes = useStyles();
   const [donation, setDonation] = useState([]);
+  const [loading, setLoading] = useState(false);
   let newData = donation.map((d, i) => {
     return {
       id: d.id,
@@ -88,6 +93,7 @@ export default function DonationTable() {
   });
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${process.env.REACT_APP_API_KEY}/donation-list`, {
       method: "GET",
       // headers: {
@@ -156,11 +162,18 @@ export default function DonationTable() {
           //   setLoading(false);
         }
       );
+    setLoading(false);
   }, []);
 
   return (
-    <div style={{ height: 500, width: "100%" }} className={classes.submit}>
-      <DataGrid rows={newData} columns={columns} pageSize={10} />
-    </div>
+    <React.Fragment>
+      {loading == false ? (
+        <div style={{ height: 500, width: "100%" }} className={classes.submit}>
+          <DataGrid rows={newData} columns={columns} pageSize={10} />
+        </div>
+      ) : (
+        <LinearProgress className={classes.submit} />
+      )}
+    </React.Fragment>
   );
 }

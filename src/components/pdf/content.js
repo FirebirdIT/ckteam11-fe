@@ -1,5 +1,11 @@
-import { React, useState, useEffect } from "react";
-import { Paper, Typography, Grid, Box } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import {
+  Paper,
+  Typography,
+  Grid,
+  Box,
+  LinearProgress,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import moment from "moment";
@@ -30,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   bg: {
-    width: "215.9mm",
-    height: "279.4mm",
+    width: "100%",
+    height: "100%",
     backgroundImage: `url(${process.env.PUBLIC_URL + "/mintGreen-bg.jpg"})`,
     backgroundPosition: "stretch",
     backgroundSize: "cover",
@@ -59,11 +65,15 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 3),
     opacity: 0.8,
   },
+  submit: {
+    marginTop: theme.spacing(5),
+  },
 }));
 
 export default function PdfContent() {
   const classes = useStyles();
   const [content, setContent] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   var profilePic = `${
     process.env.REACT_APP_API_KEY
@@ -77,6 +87,7 @@ export default function PdfContent() {
     .format("Do MMMM YYYY");
 
   useEffect(() => {
+    setLoading(true);
     fetch(
       `${process.env.REACT_APP_API_KEY}/certificate/${localStorage.getItem(
         "username"
@@ -102,166 +113,180 @@ export default function PdfContent() {
           //   setLoading(false);
         }
       );
+    setLoading(false);
   }, []);
 
   return (
-    <Paper className={classes.bg} elevation={0}>
-      <div>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          className={classes.contentPadding}
-        >
-          <Grid item xs={3}>
-            <div>
-              <img
-                src={`${process.env.REACT_APP_API_KEY}/icon/team/${content.team_username}`}
-                style={{ width: "100%" }}
-                alt="null"
-              />
-            </div>
-          </Grid>
-          <Grid item xs={7}>
+    <React.Fragment>
+      {loading == false ? (
+        <Paper className={classes.bg} elevation={0}>
+          <div>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              className={classes.contentPadding}
+            >
+              <Grid item xs={3}>
+                <div>
+                  <img
+                    src={`${process.env.REACT_APP_API_KEY}/icon/team/${content.team_username}`}
+                    style={{ width: "100%" }}
+                    alt="null"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={7}>
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="flex-start"
+                  className={classes.teamImage}
+                >
+                  <ThemeProvider theme={chineseTheme}>
+                    <Grid item xs={12}>
+                      <Typography variant="h3" fullwidth>
+                        {content.team_chinese_name}
+                      </Typography>
+                    </Grid>
+                  </ThemeProvider>
+                  <ThemeProvider theme={englishTheme}>
+                    <Grid item xs={12}>
+                      <Typography variant="h4" style={{ fontWeight: 700 }}>
+                        {content.team_english_name}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography variant="h4" style={{ fontWeight: 700 }}>
+                        {content.team_malay_name}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography variant="h5" style={{ fontWeight: 700 }}>
+                        {content.team_address}
+                      </Typography>
+                    </Grid>
+                  </ThemeProvider>
+                </Grid>
+              </Grid>
+            </Grid>
+
             <Grid
               container
               direction="column"
-              justify="center"
-              alignItems="flex-start"
-              className={classes.teamImage}
+              justify="flex-start"
+              alignItems="center"
             >
-              <ThemeProvider theme={chineseTheme}>
-                <Grid item xs={12}>
-                  <Typography variant="h3" fullwidth>
-                    {content.team_chinese_name}
-                  </Typography>
-                </Grid>
-              </ThemeProvider>
               <ThemeProvider theme={englishTheme}>
                 <Grid item xs={12}>
-                  <Typography variant="h4" style={{ fontWeight: 700 }}>
+                  <Typography
+                    variant="h5"
+                    style={{ fontWeight: 700 }}
+                    gutterBottom
+                  >
+                    TO WHOM IT MAY CONCERN
+                  </Typography>
+                </Grid>
+              </ThemeProvider>
+              <Grid item xs={12}>
+                <div className={classes.imageSize}>
+                  <img src={profilePic} style={{ width: "100%" }} alt="null" />
+                </div>
+              </Grid>
+            </Grid>
+
+            <Paper elevation={0} className={classes.paperContent}>
+              <Grid container>
+                <Grid item xs={12}>
+                  <Typography variant="subtitle2">
+                    Dear Sir/Mnpm install html2canvaadam,
+                  </Typography>
+                  <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
+                    Sub: Letter of Authorization
+                  </Typography>
+                  <Typography variant="subtitle2" paragraph>
+                    Valid for Four Month, from {now} to {after}
+                  </Typography>
+                  <Typography variant="subtitle2" gutterBottom>
+                    This letter is to authorize
+                  </Typography>
+                  <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
+                    Name： {content.volunteer_english_name}
+                  </Typography>
+                  <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
+                    NRIC： {content.volunteer_ic}
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    style={{ fontWeight: 800 }}
+                    paragraph
+                  >
+                    Designation： Volunteer
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Typography variant="subtitle2" paragraph component="div">
+                    This letter is to{" "}
+                    <Box fontWeight="fontWeightBold" display="inline">
+                      {content.volunteer_english_name}
+                    </Box>{" "}
+                    on behalf of our organisation,{" "}
+                    <Box fontWeight="fontWeightBold" display="inline">
+                      "{content.team_english_name}"
+                    </Box>
+                    , to handle the following duties and responsibilities.
+                  </Typography>
+                  <Typography variant="subtitle2" paragraph component="div">
+                    To go around: advertise, promote, and consolidate on behalf
+                    of{" "}
+                    <Box fontWeight="fontWeightBold" display="inline">
+                      "{content.team_english_name}"
+                    </Box>{" "}
+                    in order to promote and publicise at public to meet the
+                    organization's high monthly operational expenses.
+                  </Typography>
+                  <Typography variant="subtitle2" paragraph>
+                    We would like to take this opportunity to thank you for your
+                    kindness, cooperation, and support.
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={4}>
+                  <Typography variant="subtitle2">Yours truly,</Typography>
+                  <Typography
+                    variant="subtitle1"
+                    style={{ fontWeight: 800 }}
+                    gutterBottom
+                  >
                     {content.team_english_name}
                   </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography variant="h4" style={{ fontWeight: 700 }}>
-                    {content.team_malay_name}
+
+                  <ThemeProvider theme={signTheme}>
+                    <Typography variant="h5" className={classes.signPadding}>
+                      LK
+                    </Typography>
+                  </ThemeProvider>
+
+                  <Typography variant="subtitle2" component="div">
+                    <Box fontWeight="fontWeightBold" display="inline">
+                      LK,
+                    </Box>{" "}
+                    Incharge
+                  </Typography>
+                  <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
+                    H/P: {content.team_contact_number}
                   </Typography>
                 </Grid>
-                <Grid item xs={12}>
-                  <Typography variant="h5" style={{ fontWeight: 700 }}>
-                    {content.team_address}
-                  </Typography>
-                </Grid>
-              </ThemeProvider>
-            </Grid>
-          </Grid>
-        </Grid>
-
-        <Grid
-          container
-          direction="column"
-          justify="flex-start"
-          alignItems="center"
-        >
-          <ThemeProvider theme={englishTheme}>
-            <Grid item xs={12}>
-              <Typography variant="h5" style={{ fontWeight: 700 }} gutterBottom>
-                TO WHOM IT MAY CONCERN
-              </Typography>
-            </Grid>
-          </ThemeProvider>
-          <Grid item xs={12}>
-            <div className={classes.imageSize}>
-              <img src={profilePic} style={{ width: "100%" }} alt="null" />
-            </div>
-          </Grid>
-        </Grid>
-
-        <Paper elevation={0} className={classes.paperContent}>
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography variant="subtitle2">Dear sir/madam,</Typography>
-              <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
-                Sub: Letter of Authorization
-              </Typography>
-              <Typography variant="subtitle2" paragraph>
-                Valid for Four Month, from {now} to {after}
-              </Typography>
-              <Typography variant="subtitle2" gutterBottom>
-                This letter is to authorize
-              </Typography>
-              <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
-                Name： {content.volunteer_english_name}
-              </Typography>
-              <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
-                NRIC： {content.volunteer_ic}
-              </Typography>
-              <Typography
-                variant="subtitle2"
-                style={{ fontWeight: 800 }}
-                paragraph
-              >
-                Designation： Volunteer
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Typography variant="subtitle2" paragraph component="div">
-                This letter is to{" "}
-                <Box fontWeight="fontWeightBold" display="inline">
-                  {content.volunteer_english_name}
-                </Box>{" "}
-                on behalf of our organisation,{" "}
-                <Box fontWeight="fontWeightBold" display="inline">
-                  "{content.team_english_name}"
-                </Box>
-                , to handle the following duties and responsibilities.
-              </Typography>
-              <Typography variant="subtitle2" paragraph component="div">
-                To go around: advertise, promote, and consolidate on behalf of{" "}
-                <Box fontWeight="fontWeightBold" display="inline">
-                  "{content.team_english_name}"
-                </Box>{" "}
-                in order to promote and publicise at public to meet the
-                organization's high monthly operational expenses.
-              </Typography>
-              <Typography variant="subtitle2" paragraph>
-                We would like to take this opportunity to thank you for your
-                kindness, cooperation, and support.
-              </Typography>
-            </Grid>
-
-            <Grid item xs={4}>
-              <Typography variant="subtitle2">Yours truly,</Typography>
-              <Typography
-                variant="subtitle1"
-                style={{ fontWeight: 800 }}
-                gutterBottom
-              >
-                {content.team_english_name}
-              </Typography>
-
-              <ThemeProvider theme={signTheme}>
-                <Typography variant="h5" className={classes.signPadding}>
-                  LK
-                </Typography>
-              </ThemeProvider>
-
-              <Typography variant="subtitle2" component="div">
-                <Box fontWeight="fontWeightBold" display="inline">
-                  LK,
-                </Box>{" "}
-                Incharge
-              </Typography>
-              <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
-                H/P: {content.team_contact_number}
-              </Typography>
-            </Grid>
-          </Grid>
+              </Grid>
+            </Paper>
+          </div>
         </Paper>
-      </div>
-    </Paper>
+      ) : (
+        <LinearProgress className={classes.submit} />
+      )}
+    </React.Fragment>
   );
 }

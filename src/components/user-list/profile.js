@@ -1,7 +1,6 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, TextField, Grid, LinearProgress } from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const useStyles = makeStyles((theme) => ({
   padding: {
@@ -36,6 +35,7 @@ export default function UserProfile() {
   const [teamList, setTeamList] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     fetch(
       localStorage.getItem("vUsername") != null
         ? `${process.env.REACT_APP_API_KEY}/volunteer/${localStorage.getItem(
@@ -103,6 +103,7 @@ export default function UserProfile() {
         }
       );
     setLoadingC(false);
+    setLoading(false);
   }, []);
 
   const handleEdit = () => {
@@ -164,278 +165,284 @@ export default function UserProfile() {
   };
 
   return (
-    <div className={classes.padding}>
-      {loadingC === false ? (
-        <form onSubmit={onEdit}>
-          {localStorage.getItem("vUsername") === null &&
-          localStorage.getItem("tUsername") === null
-            ? edit && (
-                <Button
-                  variant="contained"
-                  component="label"
-                  color="primary"
-                  onClick={handleEdit}
-                >
-                  编辑
-                </Button>
-              )
-            : null}
-          <div>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="用户名"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              InputProps={{
-                readOnly: true,
-              }}
-              value={username}
-              helperText={edit === false ? "不可编辑" : null}
-              required
-              onChange={(e) => setUsername(e.target.value)}
-              variant="outlined"
-            />
-          </div>
-          <TextField
-            fullWidth
-            margin="normal"
-            label="英语名字"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              readOnly: edit,
-            }}
-            value={engName}
-            required
-            onChange={(e) => setEngName(e.target.value)}
-            variant="outlined"
-          />
-          {localStorage.getItem("role") === "volunteer" ||
-          localStorage.getItem("vUsername") != null ? (
-            <div>
+    <React.Fragment>
+      {loading == false ? (
+        <div className={classes.padding}>
+          {loadingC === false ? (
+            <form onSubmit={onEdit}>
+              {localStorage.getItem("vUsername") === null &&
+              localStorage.getItem("tUsername") === null
+                ? edit && (
+                    <Button
+                      variant="contained"
+                      component="label"
+                      color="primary"
+                      onClick={handleEdit}
+                    >
+                      编辑
+                    </Button>
+                  )
+                : null}
+              <div>
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  label="用户名"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={username}
+                  helperText={edit === false ? "不可编辑" : null}
+                  required
+                  onChange={(e) => setUsername(e.target.value)}
+                  variant="outlined"
+                />
+              </div>
               <TextField
                 fullWidth
                 margin="normal"
-                label="身份证号码"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                InputProps={{
-                  readOnly: true,
-                }}
-                value={ic}
-                helperText={edit === false ? "不可编辑" : null}
-                required
-                onChange={(e) => setIC(e.target.value)}
-                variant="outlined"
-              />
-              <TextField
-                fullWidth
-                margin="normal"
-                label="所属团队"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                InputProps={{
-                  readOnly: true,
-                }}
-                helperText={edit === false ? "不可编辑" : null}
-                value={team}
-                required
-                onChange={(e) => setTeam(e.target.value)}
-                variant="outlined"
-              />
-            </div>
-          ) : null}
-          {localStorage.getItem("role") === "admin" ||
-          (localStorage.getItem("role") === "team" &&
-            localStorage.getItem("vUsername") === null) ? (
-            <div>
-              {" "}
-              <TextField
-                fullWidth
-                margin="normal"
-                label="华语名字"
+                label="英语名字"
                 InputLabelProps={{
                   shrink: true,
                 }}
                 InputProps={{
                   readOnly: edit,
                 }}
-                value={chineseName}
+                value={engName}
                 required
-                onChange={(e) => setChineseName(e.target.value)}
+                onChange={(e) => setEngName(e.target.value)}
                 variant="outlined"
               />
-              <TextField
-                fullWidth
-                margin="normal"
-                label="国语名字"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                InputProps={{
-                  readOnly: edit,
-                }}
-                value={malayName}
-                required
-                onChange={(e) => setMalayName(e.target.value)}
-                variant="outlined"
-              />
-            </div>
-          ) : null}
-          <div>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="地址"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              InputProps={{
-                readOnly: edit,
-              }}
-              value={address}
-              required
-              onChange={(e) => setAddress(e.target.value)}
-              variant="outlined"
-            />
-            <TextField
-              fullWidth
-              margin="normal"
-              label="联络号码"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              InputProps={{
-                readOnly: edit,
-              }}
-              value={phoneNo}
-              required
-              onChange={(e) => setPhoneNo(e.target.value)}
-              variant="outlined"
-            />
-          </div>
-          {localStorage.getItem("role") === "admin" ||
-          (localStorage.getItem("role") === "team" &&
-            localStorage.getItem("vUsername") === null) ? (
-            <div>
-              <TextField
-                fullWidth
-                margin="normal"
-                label="SSM号码"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                InputProps={{
-                  readOnly: edit,
-                }}
-                value={ssmId}
-                required
-                onChange={(e) => setSsmId(e.target.value)}
-                variant="outlined"
-              />
-              <TextField
-                fullWidth
-                margin="normal"
-                label="银行名字"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                InputProps={{
-                  readOnly: edit,
-                }}
-                value={bankName}
-                required
-                onChange={(e) => setBankName(e.target.value)}
-                variant="outlined"
-              />
-              <TextField
-                fullWidth
-                margin="normal"
-                label="银行账号拥有者"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                InputProps={{
-                  readOnly: edit,
-                }}
-                value={bankOwnerName}
-                required
-                onChange={(e) => setBankOwnerName(e.target.value)}
-                variant="outlined"
-              />
-              <TextField
-                fullWidth
-                margin="normal"
-                label="银行账号号码"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                InputProps={{
-                  readOnly: edit,
-                }}
-                value={bankAccNo}
-                required
-                onChange={(e) => setBankAccNo(e.target.value)}
-                variant="outlined"
-              />
-            </div>
-          ) : null}
-          <div>
-            <TextField
-              fullWidth
-              margin="normal"
-              className={classes.submit}
-              label="密码"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              InputProps={{
-                readOnly: edit,
-              }}
-              type="password"
-              value={password}
-              required
-              onChange={(e) => setPassword(e.target.value)}
-              variant="outlined"
-            />
-          </div>
-          {edit === false ? (
-            loading === false ? (
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <Button
+              {localStorage.getItem("role") === "volunteer" ||
+              localStorage.getItem("vUsername") != null ? (
+                <div>
+                  <TextField
                     fullWidth
+                    margin="normal"
+                    label="身份证号码"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      readOnly: true,
+                    }}
+                    value={ic}
+                    helperText={edit === false ? "不可编辑" : null}
+                    required
+                    onChange={(e) => setIC(e.target.value)}
                     variant="outlined"
-                    color="primary"
-                    onClick={cancelEdit}
-                  >
-                    取消
-                  </Button>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Button
-                    type="submit"
+                  />
+                  <TextField
                     fullWidth
-                    variant="contained"
-                    color="primary"
-                  >
-                    提交
-                  </Button>
-                </Grid>
-              </Grid>
-            ) : (
-              <LinearProgress />
-            )
-          ) : null}
-        </form>
+                    margin="normal"
+                    label="所属团队"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      readOnly: true,
+                    }}
+                    helperText={edit === false ? "不可编辑" : null}
+                    value={team}
+                    required
+                    onChange={(e) => setTeam(e.target.value)}
+                    variant="outlined"
+                  />
+                </div>
+              ) : null}
+              {localStorage.getItem("role") === "admin" ||
+              (localStorage.getItem("role") === "team" &&
+                localStorage.getItem("vUsername") === null) ? (
+                <div>
+                  {" "}
+                  <TextField
+                    fullWidth
+                    margin="normal"
+                    label="华语名字"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      readOnly: edit,
+                    }}
+                    value={chineseName}
+                    required
+                    onChange={(e) => setChineseName(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    fullWidth
+                    margin="normal"
+                    label="国语名字"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      readOnly: edit,
+                    }}
+                    value={malayName}
+                    required
+                    onChange={(e) => setMalayName(e.target.value)}
+                    variant="outlined"
+                  />
+                </div>
+              ) : null}
+              <div>
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  label="地址"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  InputProps={{
+                    readOnly: edit,
+                  }}
+                  value={address}
+                  required
+                  onChange={(e) => setAddress(e.target.value)}
+                  variant="outlined"
+                />
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  label="联络号码"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  InputProps={{
+                    readOnly: edit,
+                  }}
+                  value={phoneNo}
+                  required
+                  onChange={(e) => setPhoneNo(e.target.value)}
+                  variant="outlined"
+                />
+              </div>
+              {localStorage.getItem("role") === "admin" ||
+              (localStorage.getItem("role") === "team" &&
+                localStorage.getItem("vUsername") === null) ? (
+                <div>
+                  <TextField
+                    fullWidth
+                    margin="normal"
+                    label="SSM号码"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      readOnly: edit,
+                    }}
+                    value={ssmId}
+                    required
+                    onChange={(e) => setSsmId(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    fullWidth
+                    margin="normal"
+                    label="银行名字"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      readOnly: edit,
+                    }}
+                    value={bankName}
+                    required
+                    onChange={(e) => setBankName(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    fullWidth
+                    margin="normal"
+                    label="银行账号拥有者"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      readOnly: edit,
+                    }}
+                    value={bankOwnerName}
+                    required
+                    onChange={(e) => setBankOwnerName(e.target.value)}
+                    variant="outlined"
+                  />
+                  <TextField
+                    fullWidth
+                    margin="normal"
+                    label="银行账号号码"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      readOnly: edit,
+                    }}
+                    value={bankAccNo}
+                    required
+                    onChange={(e) => setBankAccNo(e.target.value)}
+                    variant="outlined"
+                  />
+                </div>
+              ) : null}
+              <div>
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  className={classes.submit}
+                  label="密码"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  InputProps={{
+                    readOnly: edit,
+                  }}
+                  type="password"
+                  value={password}
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                  variant="outlined"
+                />
+              </div>
+              {edit === false ? (
+                loading === false ? (
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <Button
+                        fullWidth
+                        variant="outlined"
+                        color="primary"
+                        onClick={cancelEdit}
+                      >
+                        取消
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                      >
+                        提交
+                      </Button>
+                    </Grid>
+                  </Grid>
+                ) : (
+                  <LinearProgress />
+                )
+              ) : null}
+            </form>
+          ) : (
+            <LinearProgress />
+          )}
+        </div>
       ) : (
-        <LinearProgress />
+        <LinearProgress className={classes.submit} />
       )}
-    </div>
+    </React.Fragment>
   );
 }
