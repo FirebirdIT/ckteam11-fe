@@ -131,21 +131,22 @@ export default function DonationTable() {
             } else if (localStorage.getItem("role") === "admin") {
               let temp = [];
 
-              if (localStorage.getItem("vUsername") != null) {
+              if (localStorage.getItem("vUsername") === null) {
                 for (let i = 0; i < result["data"].length; i++) {
                   if (
                     result["data"][i]["username"] ===
-                    localStorage.getItem("vUsername")
+                    localStorage.getItem("tUsername")
                   ) {
                     temp.push(result["data"][i]);
                   }
                 }
                 setDonation(temp);
-              } else if (localStorage.getItem("tUsername") != null) {
+                console.log(temp);
+              } else if (localStorage.getItem("tUsername") === null) {
                 for (let i = 0; i < result["data"].length; i++) {
                   if (
                     result["data"][i]["username"] ===
-                    localStorage.getItem("tUsername")
+                    localStorage.getItem("vUsername")
                   ) {
                     temp.push(result["data"][i]);
                   }

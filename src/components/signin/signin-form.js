@@ -44,7 +44,6 @@ export default function SignIn() {
   const onLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log(JSON.stringify({ username: username, password: password }));
     fetch(`${process.env.REACT_APP_API_KEY}/login`, {
       // fetch(`${process.env.REACT_APP_API_KEY}/login`, {
       method: "POST",

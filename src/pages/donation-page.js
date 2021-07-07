@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // import Fab from "@material-ui/core/Fab";
 // import CropFreeIcon from "@material-ui/icons/CropFree";
@@ -22,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DonationPage() {
   const classes = useStyles();
+
+  useEffect(() => {
+    localStorage.removeItem("tUsername");
+    localStorage.removeItem("vUsername");
+  }, []);
   // const [open, setOpen] = useState(false);
 
   // const handleClickOpen = () => {

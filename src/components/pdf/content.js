@@ -104,6 +104,7 @@ export default function PdfContent() {
         (result) => {
           if (result["success"] === true) {
             setContent(result["data"]);
+            console.log(result["data"]);
           } else {
             console.log("error printing");
           }

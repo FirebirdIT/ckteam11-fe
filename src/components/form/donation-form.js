@@ -75,11 +75,7 @@ export default function DonationForm() {
       .then((res) => res.json())
       .then(
         (result) => {
-          if (
-            result["msg"] === "Record Successfully" &&
-            result["success"] === true
-          ) {
-            setLoading(false);
+          if (result["success"] === true) {
             alert(result["msg"]);
             setCustomerName("");
             setEmail("");

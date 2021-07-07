@@ -60,7 +60,6 @@ export default function UserProfile() {
       .then(
         (result) => {
           if (result["success"] === true) {
-            // setProfileData(result["data"]);
             setUsername(result["data"]["username"]);
             setPassword(result["data"]["password"]);
             setEngName(result["data"]["english_name"]);
@@ -84,24 +83,28 @@ export default function UserProfile() {
       );
     if (localStorage.getItem("role") === "volunteer") {
       setUploadImg(
-        `${process.env.REACT_APP_API_KEY}/icon/volunteer/${username}`
+        `${process.env.REACT_APP_API_KEY}/icon/volunteer/${localStorage.getItem(
+          "username"
+        )}`
+      );
+    } else if (localStorage.getItem("vUsername") != null) {
+      setUploadImg(
+        `${process.env.REACT_APP_API_KEY}/icon/volunteer/${localStorage.getItem(
+          "vUsername"
+        )}`
+      );
+    } else if (localStorage.getItem("role") === "admin") {
+      setUploadImg(
+        `${process.env.REACT_APP_API_KEY}/icon/team/${localStorage.getItem(
+          "tUsername"
+        )}`
       );
     } else if (localStorage.getItem("role") === "team") {
-      setUploadImg(`${process.env.REACT_APP_API_KEY}/icon/team/${username}`);
-    } else if (localStorage.getItem("role") === "admin") {
-      if (localStorage.getItem("vUsername") != null) {
-        setUploadImg(
-          `${
-            process.env.REACT_APP_API_KEY
-          }/icon/volunteer/${localStorage.getItem("vUsername")}`
-        );
-      } else {
-        setUploadImg(
-          `${process.env.REACT_APP_API_KEY}/icon/team/${localStorage.getItem(
-            "tUsername"
-          )}`
-        );
-      }
+      setUploadImg(
+        `${process.env.REACT_APP_API_KEY}/icon/team/${localStorage.getItem(
+          "username"
+        )}`
+      );
     }
     setLoading(false);
   }, []);
@@ -294,7 +297,8 @@ export default function UserProfile() {
                 />
               </div>
             ) : null}
-            {localStorage.getItem("role") === "admin" ||
+            {(localStorage.getItem("role") === "admin" &&
+              localStorage.getItem("vUsername") === null) ||
             (localStorage.getItem("role") === "team" &&
               localStorage.getItem("vUsername") === null) ? (
               <div>
@@ -363,7 +367,8 @@ export default function UserProfile() {
                 variant="outlined"
               />
             </div>
-            {localStorage.getItem("role") === "admin" ||
+            {(localStorage.getItem("role") === "admin" &&
+              localStorage.getItem("vUsername") === null) ||
             (localStorage.getItem("role") === "team" &&
               localStorage.getItem("vUsername") === null) ? (
               <div>

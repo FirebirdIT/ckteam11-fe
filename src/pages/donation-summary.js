@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Title from "../components/title/title";
 import DonationTable from "../components/donation-list/donation-table";
@@ -14,6 +14,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DonationSummary() {
   const classes = useStyles();
+
+  useEffect(() => {
+    localStorage.removeItem("tUsername");
+    localStorage.removeItem("vUsername");
+  }, []);
   return (
     <div className={classes.paper}>
       <Title>捐款总额</Title>

@@ -1,4 +1,3 @@
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Title from "../components/title/title";
 import UserTable from "../components/user-list/user-info";

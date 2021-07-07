@@ -47,7 +47,6 @@ export default function NabVar() {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   useEffect(() => {
-    console.log(localStorage.getItem("access_token"));
     if (
       // localStorage.getItem("access_token") === undefined ||
       // localStorage.getItem("role") === undefined ||
