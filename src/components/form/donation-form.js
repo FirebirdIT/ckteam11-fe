@@ -52,6 +52,7 @@ export default function DonationForm() {
     } else {
       URL = `${process.env.REACT_APP_API_KEY}/donation/volunteer`;
     }
+    alert('Sending Email, Please Wait')
     fetch(URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

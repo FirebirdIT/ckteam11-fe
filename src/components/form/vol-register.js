@@ -43,11 +43,15 @@ export default function VolunteerRegister() {
       .then(
         (result) => {
           if (result["success"] === true) {
-            let temp = [];
-            for (let index = 0; index < result["data"].length; index++) {
-              temp.push(result["data"][index]["username"]);
-            }
-            setTeamList(temp);
+              if (localStorage.getItem('role') === 'admin') {
+                  let temp = [];
+                  for (let index = 0; index < result["data"].length; index++) {
+                      temp.push(result["data"][index]["username"]);
+                  }
+                  setTeamList(temp);
+              } else {
+                  setTeamList([localStorage.getItem("username")]);
+              }
           }
         },
         (error) => {
