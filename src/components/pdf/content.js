@@ -267,18 +267,18 @@ export default function PdfContent() {
 
                   <ThemeProvider theme={signTheme}>
                     <Typography variant="h5" className={classes.signPadding}>
-                      LK
+                      YT Ong
                     </Typography>
                   </ThemeProvider>
 
                   <Typography variant="subtitle2" component="div">
                     <Box fontWeight="fontWeightBold" display="inline">
-                      LK,
+                      YT Ong,
                     </Box>{" "}
                     Incharge
                   </Typography>
                   <Typography variant="subtitle2" style={{ fontWeight: 800 }}>
-                    H/P: {content.team_contact_number}
+                    H/P: 016 855 1687
                   </Typography>
                 </Grid>
               </Grid>
