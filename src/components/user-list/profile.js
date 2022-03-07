@@ -64,8 +64,8 @@ export default function UserProfile() {
                         setPassword(result["data"]["password"]);
                         setEngName(result["data"]["english_name"]);
                         setChineseName(result["data"]["chinese_name"]);
-                        setEngName(result["data"]["malay_name"]);
-                        setMalayName(result["data"]["username"]);
+                        setMalayName(result["data"]["malay_name"]);
+                        setUsername(result["data"]["username"]);
                         setAddress(result["data"]["address"]);
                         setPhoneNo(result["data"]["phone_no"]);
                         setSsmId(result["data"]["team_ssm_id"]);
@@ -138,7 +138,7 @@ export default function UserProfile() {
         formData.append("english_name", engName);
         formData.append("address", address);
         formData.append("phone_no", phoneNo);
-        if (localStorage.getItem("role") === "team") {
+        if (localStorage.getItem("role") === "team" || localStorage.getItem("role") === "admin") {
             formData.append("chinese_name", chineseName);
             formData.append("malay_name", malayName);
             formData.append("pic", pic);
@@ -194,8 +194,8 @@ export default function UserProfile() {
                                 <div>
                                     <img src={uploadImg} style={{width: "100%"}} alt="null"/>
                                 </div>
-                                {localStorage.getItem("vUsername") === null &&
-                                localStorage.getItem("tUsername") === null
+                                {
+                                    (localStorage.getItem("role") === "team" || localStorage.getItem("role") === "admin")
                                     ? edit && (
                                     <Button
                                         fullWidth
@@ -444,16 +444,16 @@ export default function UserProfile() {
                                     shrink: true,
                                 }}
                                 InputProps={{
-                                    readOnly: true,
+                                    readOnly: ((localStorage.getItem("role") === "admin") || (localStorage.getItem("role") === "team" && localStorage.getItem("vUsername") != null)) ? edit : true,
                                 }}
-                                helperText={edit === false ? "不可编辑" : null}
+                                helperText={((localStorage.getItem("role") === "admin") || (localStorage.getItem("role") === "team" && localStorage.getItem("vUsername") != null)) ? null : "不可编辑"}
                                 type="password"
                                 value={password}
                                 required
                                 onChange={(e) => setPassword(e.target.value)}
                                 variant="outlined"
                             />
-                        </div>
+                        </div>編輯
                         {edit === false ? (
                             loading === false ? (
                                 <Grid container spacing={2}>

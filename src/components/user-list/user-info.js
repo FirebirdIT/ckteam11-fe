@@ -40,6 +40,23 @@ const MatEdit = ({username, role}) => {
     );
 };
 
+const onDeleteTeam = (username) => {
+    axios.post(`${process.env.REACT_APP_API_KEY}/team/delete`, {
+        username: username,
+    }, {
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+    }).then(res => {
+        alert("Successfully deleted!");
+        window.location.reload()
+    })
+        .catch(err => {
+            console.log(err);
+            alert("Failed to delete!");
+        });
+}
+
 const onDeleteVolunteer = (username) => {
     axios.post(`${process.env.REACT_APP_API_KEY}/volunteer/delete`, {
         username: username,
@@ -89,7 +106,7 @@ const columns = [
                         role={params.getValue(params.row.id, "role")}
                     />
                     <Button
-                        onClick={() => onDeleteVolunteer(params.getValue(params.row.id, "username"))}>Delete</Button>
+                        onClick={() => localStorage.getItem("role") === "admin" ? onDeleteTeam(params.getValue(params.row.id, "username")) : onDeleteVolunteer(params.getValue(params.row.id, "username"))}>Delete</Button>
                 </div>
             );
         },
