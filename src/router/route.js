@@ -7,6 +7,8 @@ import Team from "../pages/users/team";
 import Admin from "../pages/users/admin";
 import SignIn from "../pages/signin";
 import AppBar from "../components/main-layout/navbar";
+import {ReportAdmin} from "../pages/report/admin";
+import {ReportTeam} from "../pages/report/team";
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -48,6 +50,13 @@ export default function App() {
                             <Route path="/team">
                                 {/* team page */}
                                 <Team/>
+                            </Route>
+
+                            <Route path="/report/admin">
+                                <ReportAdmin/>
+                            </Route>
+                            <Route path="/report/team">
+                                <ReportTeam/>
                             </Route>
                         </Switch>
                     </Container>

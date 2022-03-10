@@ -94,7 +94,7 @@ export default function DonationTable() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${process.env.REACT_APP_API_KEY}/donation-list`, {
+    fetch( localStorage.getItem("role") === "volunteer" ? `${process.env.REACT_APP_API_KEY}/donation-list/volunteer` : localStorage.getItem("role") === "team" ? `${process.env.REACT_APP_API_KEY}/donation-list/team` : `${process.env.REACT_APP_API_KEY}/donation-list`, {
       method: "GET",
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -105,56 +105,37 @@ export default function DonationTable() {
         (result) => {
           if (result["success"] === true) {
             if (
-              localStorage.getItem("role") === "volunteer" ||
-              localStorage.getItem("role") === "team"
+                localStorage.getItem("role") === "volunteer"
             ) {
               let temp = [];
 
               for (let i = 0; i < result["data"].length; i++) {
-                if (localStorage.getItem("vUsername") === null) {
-                  if (
+                if (
                     result["data"][i]["username"] ===
                     localStorage.getItem("username")
-                  ) {
-                    temp.push(result["data"][i]);
-                  }
-                } else {
-                  if (
-                    result["data"][i]["username"] ===
-                    localStorage.getItem("vUsername")
-                  ) {
-                    temp.push(result["data"][i]);
-                  }
+                ) {
+                  temp.push(result["data"][i]);
+                }
+              }
+              setDonation(temp);
+            }
+            else if (
+              localStorage.getItem("role") === "team"
+            ) {
+              let temp = [];
+              for (let i = 0; i < result["data"].length; i++) {
+                console.log(result["data"][i])
+                if (
+                    result["data"][i]["team"] ===
+                    localStorage.getItem("username")
+                ) {
+                  temp.push(result["data"][i]);
                 }
               }
               setDonation(temp);
             } else if (localStorage.getItem("role") === "admin") {
-              let temp = [];
 
-              if (localStorage.getItem("vUsername") === null) {
-                for (let i = 0; i < result["data"].length; i++) {
-                  if (
-                    result["data"][i]["username"] ===
-                    localStorage.getItem("tUsername")
-                  ) {
-                    temp.push(result["data"][i]);
-                  }
-                }
-                setDonation(temp);
-                console.log(temp);
-              } else if (localStorage.getItem("tUsername") === null) {
-                for (let i = 0; i < result["data"].length; i++) {
-                  if (
-                    result["data"][i]["username"] ===
-                    localStorage.getItem("vUsername")
-                  ) {
-                    temp.push(result["data"][i]);
-                  }
-                  setDonation(temp);
-                }
-              } else {
-                setDonation(result["data"]);
-              }
+              setDonation(result["data"]);
             }
           }
         },

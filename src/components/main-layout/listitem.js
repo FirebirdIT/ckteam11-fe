@@ -106,6 +106,7 @@ export const mainListItems = (
         />
       </ListItem>
     )}
+
     {/* PROFILE */}
     {localStorage.getItem("role") === "admin" ? null : (
       <ListItem
@@ -124,6 +125,44 @@ export const mainListItems = (
         />
       </ListItem>
     )}
+
+      {/* report */}
+      {localStorage.getItem("role") === "admin" && (
+          <ListItem
+              button
+              onClick={() => {
+                  window.location.href = `/report/admin`;
+              }}
+          >
+              <ListItemIcon>
+                  <AccountCircle />
+              </ListItemIcon>
+              <ListItemText
+                  primary={
+                      "報告"
+                  }
+              />
+          </ListItem>
+      )}
+      {localStorage.getItem("role") === "team" && (
+          (
+              <ListItem
+                  button
+                  onClick={() => {
+                      window.location.href = `/report/team`;
+                  }}
+              >
+                  <ListItemIcon>
+                      <AccountCircle />
+                  </ListItemIcon>
+                  <ListItemText
+                      primary={
+                          "報告"
+                      }
+                  />
+              </ListItem>
+          )
+      )}
   </div>
 );
 
