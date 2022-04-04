@@ -197,6 +197,7 @@ export default function DonationForm() {
           <MenuItem value={0}>现金</MenuItem>
           <MenuItem value={1}>支票</MenuItem>
           <MenuItem value={2}>二维码</MenuItem>
+          <MenuItem value={3}>銀行戶口</MenuItem>
         </Select>
       </FormControl>
 
@@ -212,6 +213,12 @@ export default function DonationForm() {
         />
       ) : donationType == "2" ? (
         <img src="/logo192.png" alt="null" />
+      ) : donationType == "3" ? (
+          <>
+            <h4>Pertubuhan Kebajikan Orang Tua Xiao Xin </h4>
+            <h4>8881034592429</h4>
+            <h4>Ambank</h4>
+          </>
       ) : null}
       <div className={classes.submit}>
         {loading == false ? (
